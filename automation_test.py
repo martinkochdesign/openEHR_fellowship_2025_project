@@ -58,3 +58,13 @@ def list_ADL_files(temp_dir):
 
 with open("dataset.js", "w") as f:
   f.write(str(list_ADL_files('temp')))
+
+#get list of remaining files in temp folder
+remaining_files = os.listdir('temp/')
+#delete remaining files
+
+for rem in remaining_files:
+	os.remove('temp/' + rem)
+#delete temp folder
+
+os.rmdir('temp')
