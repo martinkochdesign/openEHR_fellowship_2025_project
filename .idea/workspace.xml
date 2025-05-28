@@ -4,7 +4,6 @@
     <list default="true" id="e241bcd5-d29e-4dbf-9d32-2f4154f55cb2" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/automation_test.py" beforeDir="false" afterPath="$PROJECT_DIR$/automation_test.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dataset.js" beforeDir="false" afterPath="$PROJECT_DIR$/dataset.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />

@@ -1,0 +1,116 @@
+﻿archetype (adl_version=1.4; uid=7d2ed412-f9f8-4fb7-bf8f-0e1ea045fb0a)
+	openEHR-EHR-CLUSTER.thesaurus_ecap.v0
+
+concept
+	[at0000]	-- Thesaurus ECAP
+language
+	original_language = <[ISO_639-1::en]>
+	translations = <
+		["ca"] = <
+			language = <[ISO_639-1::ca]>
+			author = <
+			>
+		>
+		["es"] = <
+			language = <[ISO_639-1::es]>
+			author = <
+			>
+		>
+	>
+description
+	original_author = <
+		["name"] = <"Modelatge del Coneixement Clínic  Catsalut">
+		["organisation"] = <"CatSalut">
+		["email"] = <"ckm.salut@gencat.cat">
+		["date"] = <"2024-07-03">
+	>
+	details = <
+		["en"] = <
+			language = <[ISO_639-1::en]>
+			purpose = <"To record ">
+			use = <"Use to record ">
+			misuse = <"Not to be used to record
+
+">
+			copyright = <"© openEHR Foundation, Departament de Salut de la Generalitat de Catalunya">
+		>
+		["ca"] = <
+			language = <[ISO_639-1::ca]>
+			purpose = <"Registrar ">
+			use = <"S'utilitza per registrar ">
+			misuse = <"No s'ha d'utilitzar per registrar">
+			copyright = <"© openEHR Foundation, Departament de Salut de la Generalitat de Catalunya">
+		>
+		["es"] = <
+			language = <[ISO_639-1::es]>
+			purpose = <"Registrar ">
+			use = <"Se utiliza para registrar ">
+			misuse = <"No debe utilizarse para
+">
+			copyright = <"© openEHR Foundation, Departament de Salut de la Generalitat de Catalunya">
+		>
+	>
+	lifecycle_state = <"in_development">
+	other_contributors = <>
+	other_details = <
+		["licence"] = <"Creative Commons Attribution-ShareAlike 4.0 <https://creativecommons.org/licenses/by-sa/4.0/>">
+		["custodian_organisation"] = <"Departament de Salut de la Generalitat de Catalunya">
+		["original_namespace"] = <"org.catsalut">
+		["original_publisher"] = <"Departament de Salut de la Generalitat de Catalunya">
+		["custodian_namespace"] = <"org.catsalut">
+		["MD5-CAM-1.0.1"] = <"D8892AE0F434DFCFBB1C07F2FEB55552">
+		["build_uid"] = <"f7bbe51f-c7ef-43bf-b3a6-823f1833236b">
+		["revision"] = <"0.0.1-alpha">
+	>
+
+definition
+	CLUSTER[at0000] occurrences matches {0..1} matches {    -- Thesaurus ECAP
+		items cardinality matches {1..*; unordered} matches {
+			ELEMENT[at0043] occurrences matches {0..1} matches {    -- Diagnosis Thesaurus ECAP
+				value matches {
+					DV_CODED_TEXT matches {*}
+				}
+			}
+		}
+	}
+
+
+ontology
+	term_definitions = <
+		["en"] = <
+			items = <
+				["at0000"] = <
+					text = <"Thesaurus ECAP">
+					description = <"">
+				>
+				["at0043"] = <
+					text = <"Diagnosis Thesaurus ECAP">
+					description = <"">
+				>
+			>
+		>
+		["ca"] = <
+			items = <
+				["at0000"] = <
+					text = <"thesaurus_ecap">
+					description = <"">
+				>
+				["at0043"] = <
+					text = <"*DV_CODED_TEXT (en)">
+					description = <"">
+				>
+			>
+		>
+		["es"] = <
+			items = <
+				["at0000"] = <
+					text = <"thesaurus_ecap">
+					description = <"">
+				>
+				["at0043"] = <
+					text = <"*DV_CODED_TEXT (en)">
+					description = <"">
+				>
+			>
+		>
+	>
