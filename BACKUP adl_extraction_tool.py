@@ -13,17 +13,17 @@ import time
 
 # VARIABLES ******************************************************************
 # general things
-version = 'v4.13'
+version = 'v4.12'
 author = 'Martin A. Koch, PhD'
 copyright = '(c) 2025, CatSalut. Servei Català de la Salut'
 license = 'License: Apache 2.0'
-# Set headless to True if you do not need the GUI (or False if you want to use the GUI)
+# Set headless to True if you do not need the GUI (or False if you want to use the GUI
 headless = True
 # Variables for running script headless (without GUI)
 URL = 'https://ckm.openehr.org/ckm/retrieveResources?resourceType=archetype&format=ADL&state1=INITIAL&state2=DRAFT&state3=TEAMREVIEW&state4=REVIEWSUSPENDED&state5=PUBLISHED&state6=REASSESS_DRAFT&state7=REASSESS_TEAMREVIEW&state8=REASSESS_REVIEWSUSPENDED'
 zipFileName = 'TempZipFile.zip'
 CKMorGitHub = 'CKM'  # "GITHUB" or "CKM", depending on source
-provenance = 'ckm.openehr.org'
+provenance = 'CKM International'
 
 # URLs for the GUI ***********************************************************
 #URLs for gitHub files
@@ -199,12 +199,8 @@ def check_node_attribute_data_types(node):
 	node['lifecycle_state'] = control_data_type(node['lifecycle_state'], 'str', 'lifecycle_state')
 	node['original_language'] = control_data_type(node['original_language'], 'str', 'orig_lang')
 	node['date'] = control_data_type(node['date'], 'str', 'date')
-	node['author_name'] = control_data_type(node['author_name'], 'str', 'author_name')
-	node['author_organisation'] = control_data_type(node['author_organisation'], 'str', 'author_organisation')
-	node['author_email'] = control_data_type(node['author_email'], 'str', 'author_email')
 	node['translation_languages'] = control_data_type(node['translation_languages'], 'list', 'trans_lang')
 	node['purpose'] = control_data_type(node['purpose'], 'str', 'purpose')
-	node['copyright'] = control_data_type(node['copyright'], 'str', 'copyright')
 	node['use'] = control_data_type(node['use'], 'str', 'use')
 	node['keywords'] = control_data_type(node['keywords'], 'list', 'keywords')
 	for i in range(len(node['include'])):
@@ -1181,7 +1177,6 @@ def transformWorkflow(zipFileName):
 		language_JSON = convert_section_to_JSON(language_section)
 		print('Creating description JSON')
 		description_JSON = convert_section_to_JSON(description_section)
-
 		print('Creating ontology JSON')
 		ontology_JSON = convert_section_to_JSON(ontology_section)
 		#revisionHistory_JSON = convert_section_to_JSON(revisionHistory_section)
@@ -1213,14 +1208,6 @@ def transformWorkflow(zipFileName):
 		else:
 			node['lifecycle_state'] = ''
 
-
-		#license
-		node['licence'] = ''
-		if 'other_details' in description_JSON.keys():
-			if isinstance(description_JSON['other_details'], dict):
-				if 'licence' in description_JSON['other_details'].keys():
-					node['licence'] = str(description_JSON['other_details']['licence'])
-
 		# orginal language
 		if 'original_language' in language_JSON.keys():
 			full_language = language_JSON['original_language']
@@ -1233,30 +1220,13 @@ def transformWorkflow(zipFileName):
 		else:
 			node['original_language'] = ''
 
-		"""
-		#author
-		if 'original_author' in description_JSON.keys():
-			node['original_author'] = description_JSON['original_author']
-		else:
-			node['original_author'] = ''
-		"""
-
-		#original author date, name, organisation, email
+		#original author date
 		node['date'] = ''
-		node['author_name'] = ''
-		node['author_organisation'] = ''
-		node['author_email'] = ''
-
 		if 'original_author' in description_JSON.keys():
 			if isinstance(description_JSON['original_author'],dict):
 				if 'date' in description_JSON['original_author'].keys():
-					node['date'] = str(description_JSON['original_author']['date'])
-				if 'name' in description_JSON['original_author'].keys():
-					node['author_name'] = str(description_JSON['original_author']['name'])
-				if 'organisation' in description_JSON['original_author'].keys():
-					node['author_organisation'] = str(description_JSON['original_author']['organisation'])
-				if 'email' in description_JSON['original_author'].keys():
-					node['author_email'] = str(description_JSON['original_author']['email'])
+					node['date'] = description_JSON['original_author']['date']
+		
 
 		# WATCH OUT! IF ORIGINAL LANGUAGE IS NOT "EN", we are going to try to get english information, if available...
 		default_language = 'en'
@@ -1293,13 +1263,7 @@ def transformWorkflow(zipFileName):
 				node['keywords'] = description_JSON['details'][current_language]['keywords']
 			else:
 				node['keywords'] = []
-			#copyright
-			if 'copyright' in description_JSON['details'][current_language].keys():
-				node['copyright'] = str(description_JSON['details'][current_language]['copyright'])
-			else:
-				node['copyright'] = ''
 		else:
-				node['copyright'] = ''
 				node['purpose'] = ''
 				node['use'] = ''
 				node['keywords'] = []
@@ -1551,61 +1515,61 @@ def select_URL_pre_source():
 	match radio_var.get():
 		case 1:
 			URL = international_url_CKM
-			#base_URL = 'https://ckm.openehr.org/ckm/'
+			base_URL = 'https://ckm.openehr.org/ckm/'
 			prefix = 'CKM_INT'
 			source = '2'
-			provenance = 'CKM International (ckm.openehr.org)'
+			provenance = 'CKM International'
 		case 2:
 			URL = catsalut_url_CKM
-			#base_URL = 'https://ckm.salut.gencat.cat/ckm/'
+			base_URL = 'https://ckm.salut.gencat.cat/ckm/'
 			prefix = 'CKM_CAT'
 			source = '2'
-			provenance = 'CKM CatSalut (ckm.salut.gencat.cat)'
+			provenance = 'CKM CatSalut'
 		case 3:
 			URL = arketyper_url_CKM
-			#base_URL = 'https://arketyper.no/ckm/'
+			base_URL = 'https://arketyper.no/ckm/'
 			prefix = 'CKM_NO'
 			source = '2'
-			provenance = 'CKM Arketyper (arketyper.no)'
+			provenance = 'CKM Arketyper'
 		case 4:
 			URL = highmed_url_CKM
-			#base_URL = 'https://ckm.highmed.org/ckm/'
+			base_URL = 'https://ckm.highmed.org/ckm/'
 			prefix = 'CKM_DE'
 			source = '2'
-			provenance = 'CKM HighMed (ckm.highmed.org)'
+			provenance = 'CKM HighMed'
 		case 5:
 			URL = international_url_github
-			#base_URL = 'https://ckm.openehr.org/ckm/'
+			base_URL = 'https://ckm.openehr.org/ckm/'
 			prefix = 'GIT_INT'
 			source = '1'
 			provenance = 'GitHub International'
 		case 6:
 			URL = catsalut_url_github
-			#base_URL = 'https://ckm.salut.gencat.cat/ckm/'
+			base_URL = 'https://ckm.salut.gencat.cat/ckm/'
 			prefix = 'GIT_CAT'
 			source = '1'
 			provenance = 'GitHub CatSalut'
 		case 7:
 			URL = arketyper_url_github
-			#base_URL = 'https://arketyper.no/ckm/'
+			base_URL = 'https://arketyper.no/ckm/'
 			prefix = 'GIT_NO'
 			source = '1'
 			provenance = 'GitHub Arketyper'
 		case 8:
 			URL = apperta_url_github
-			#base_URL = None
+			base_URL = None
 			prefix = 'GIT_UK'
 			source = '1'
 			provenance = 'GitHub Apperta'
 		case _:
 			URL = None
-			#base_URL = None
+			base_URL = None
 			prefix = None
 			source = None
 			provenance = ''
 
 
-	return URL, prefix, source
+	return URL, base_URL, prefix, source
 
 def download():
 	global provenance
@@ -1639,7 +1603,7 @@ def download():
 		remove_folder_with_retries('temp')
 
 	if radio_var.get()!=9:
-		URL, prefix, source = select_URL_pre_source()
+		URL, base_URL, prefix, source = select_URL_pre_source()
 		#input_folder_path
 		#add_message('Output path' + input_folder_path)
 		if URL:

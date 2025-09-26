@@ -17,8 +17,8 @@ version = 'v4.13'
 author = 'Martin A. Koch, PhD'
 copyright = '(c) 2025, CatSalut. Servei Català de la Salut'
 license = 'License: Apache 2.0'
-# Set headless to True if you do not need the GUI (or False if you want to use the GUI)
-headless = True
+# Set headless to True if you do not need the GUI (or False if you want to use the GUI
+headless = False
 # Variables for running script headless (without GUI)
 URL = 'https://ckm.openehr.org/ckm/retrieveResources?resourceType=archetype&format=ADL&state1=INITIAL&state2=DRAFT&state3=TEAMREVIEW&state4=REVIEWSUSPENDED&state5=PUBLISHED&state6=REASSESS_DRAFT&state7=REASSESS_TEAMREVIEW&state8=REASSESS_REVIEWSUSPENDED'
 zipFileName = 'TempZipFile.zip'
