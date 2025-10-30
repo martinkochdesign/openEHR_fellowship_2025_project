@@ -13,12 +13,12 @@ import time
 
 # VARIABLES ******************************************************************
 # general things
-version = 'v4.15'
+version = 'v4.14'
 author = 'Martin A. Koch, PhD'
 copyright = '(c) 2025, CatSalut. Servei Català de la Salut'
 license = 'License: Apache 2.0'
 # Set headless to True if you do not need the GUI (or False if you want to use the GUI
-headless = True
+headless = False
 # Variables for running script headless (without GUI)
 URL = 'https://ckm.openehr.org/ckm/retrieveResources?resourceType=archetype&format=ADL&state1=INITIAL&state2=DRAFT&state3=TEAMREVIEW&state4=REVIEWSUSPENDED&state5=PUBLISHED&state6=REASSESS_DRAFT&state7=REASSESS_TEAMREVIEW&state8=REASSESS_REVIEWSUSPENDED'
 zipFileName = 'TempZipFile.zip'
@@ -1242,7 +1242,6 @@ def transformWorkflow(zipFileName):
 			node['original_author'] = ''
 		"""
 
-
 		#original author date, name, organisation, email
 		node['date'] = ''
 		node['author_name'] = ''
@@ -1290,11 +1289,6 @@ def transformWorkflow(zipFileName):
 				node['use'] = str(description_JSON['details'][current_language]['use'])
 			else:
 				node['use'] = ''
-			# misuse
-			if 'misuse' in description_JSON['details'][current_language].keys():
-				node['misuse'] = str(description_JSON['details'][current_language]['misuse'])
-			else:
-				node['misuse'] = ''
 			# keywords
 			if 'keywords' in description_JSON['details'][current_language].keys():
 				node['keywords'] = description_JSON['details'][current_language]['keywords']
