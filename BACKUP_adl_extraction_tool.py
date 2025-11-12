@@ -13,7 +13,7 @@ import time
 
 # VARIABLES ******************************************************************
 # general things
-version = 'v4.16'
+version = 'v4.15'
 author = 'Martin A. Koch, PhD'
 copyright = '(c) 2025, CatSalut. Servei Català de la Salut'
 license = 'License: Apache 2.0'
@@ -1000,35 +1000,6 @@ def transform_definition_to_JSON(definition_text):
 
 	return json.loads(definition_text)
 
-
-def get_occurrences_from_definition(definition_text):
-	# get all occurrences, if defined
-	lines = definition_text.split('\n')
-
-	occurr_dict = {}
-
-	for i in range(len(lines)):
-		pattern = re.compile(r'\[(at[0-9]+)\].*occurrences.*matches.*\{([0-9*]+..[0-9*]+)\}')
-		matches = pattern.finditer(lines[i])
-		element_pattern = re.compile(r'ELEMENT\[(at[0-9]+)\](?!.*occurrences matches).*matches \{')
-		element_matches = element_pattern.finditer(lines[i])
-		cluster_pattern = re.compile(r'CLUSTER\[(at[0-9]+)\](?!.*occurrences matches).*matches \{')
-		cluster_matches = cluster_pattern.finditer(lines[i])
-
-		if matches:
-			for match in matches:
-				occurr_dict[match.group(1)] = match.group(2)
-		if element_matches:
-			for element_match in element_matches:
-				occurr_dict[element_match.group(1)] = '1..1'
-		if cluster_matches:
-			for cluster_match in cluster_matches:
-				occurr_dict[cluster_match.group(1)] = '1..1'
-
-	return occurr_dict
-
-
-
 def parse_definition_for_elements(temp_JSON, element_list):
 	for key in temp_JSON.keys():
 		if isinstance(temp_JSON[key], dict):
@@ -1083,93 +1054,16 @@ def parse_definition_for_inclusions(temp_JSON, inclusion_list, includeorexclude)
 			parse_definition_for_inclusions(temp_JSON[key],inclusion_list,includeorexclude)
 	return inclusion_list
 
-def dict_to_html(d, indent=0):
-	css = """
-		<style>
-		.dict-level {
-			list-style-type: none;
-			margin-left: 1.5em;
-			padding-left: 1em;
-			border-left: 2px solid #b3c6ff;
-			background: #f8faff;
-			font-family: 'Segoe UI', Arial, sans-serif;
-			font-size: 15px;
-		}
-		.dict-key {
-			font-weight: bold;
-			color: #2a3b8f;
-		}
-		.dict-value {
-			color: #1a7f37;
-			font-family: 'Fira Mono', 'Consolas', monospace;
-		}
-		.dict-level > li {
-			margin-bottom: 0.3em;
-			padding: 0.2em 0.5em;
-			border-radius: 4px;
-			transition: background 0.2s;
-		}
-		.dict-level > li:hover {
-			background: #e6f0ff;
-		}
-		</style>
-		"""
-	html = ""
-	indent_str = "  " * indent
-	if isinstance(d, dict):
-		html += f"{indent_str}<ul class='dict-level'>\n"
-		for key, value in d.items():
-			html += f"{indent_str}  <li><span class='dict-key'>{key}</span>: "
-			if isinstance(value, (dict, list)):
-				html += "\n" + dict_to_html(value, indent + 2) + f"{indent_str}  "
-			else:
-				html += f"<span class='dict-value'>{value}</span>"
-			html += "</li>\n"
-		html += f"{indent_str}</ul>\n"
-	elif isinstance(d, list):
-		html += f"{indent_str}<ul class='dict-level'>\n"
-		for item in d:
-			html += f"{indent_str}  <li>"
-			html += dict_to_html(item, indent + 2)
-			html += f"{indent_str}  </li>\n"
-		html += f"{indent_str}</ul>\n"
-	else:
-		html += f"<span class='dict-value'>{d}</span>"
-	return html
-
-def dict_to_collapsible_html(d):
-    html = ""
-    if isinstance(d, dict):
-        for key, value in d.items():
-            if isinstance(value, (dict, list)):
-                html += f"<details><summary>{key}</summary>{dict_to_collapsible_html(value)}</details>\n"
-            else:
-                html += f"<div><span class='dict-key'>{key}</span>: <span class='dict-value'>{value}</span></div>\n"
-    elif isinstance(d, list):
-        html += "<ul>"
-        for item in d:
-            html += "<li>" + dict_to_collapsible_html(item) + "</li>"
-        html += "</ul>"
-    else:
-        html += f"<span class='dict-value'>{d}</span>"
-    return html
-
 def convert_and_parse_definition_section(definition_section):
 	definition_text = '\n'.join(definition_section)
 	definition_JSON = transform_definition_to_JSON(definition_text)
-	#structure_html = dict_to_html(definition_JSON)
-	structure_html = dict_to_collapsible_html(definition_JSON)
-
-
 	element_list = []
 	element_list = parse_definition_for_elements(definition_JSON, element_list)
 	inclusion_list = []
 	inclusion_list = parse_definition_for_inclusions(definition_JSON, inclusion_list, 'include')
 	exclusion_list = []
 	exclusion_list = parse_definition_for_inclusions(definition_JSON, exclusion_list, 'exclude')
-	occurr_dic = get_occurrences_from_definition(definition_text)
-
-	return element_list, inclusion_list, exclusion_list, occurr_dic, structure_html
+	return element_list, inclusion_list, exclusion_list
 
 def get_archetypes_from_pattern(pattern, archetypeIdList):
 	outputList = []
@@ -1296,7 +1190,7 @@ def transformWorkflow(zipFileName):
 		# definition_section has to be parsed separately
 		print('Creating definition JSON')
 		#inclusions, exclusions, elements = parse_inclusion_exclusion_elements(definition_section, archetypeIdList)
-		element_list, inclusion_list, exclusion_list, occurr_dic, structure_html = convert_and_parse_definition_section(definition_section)
+		element_list, inclusion_list, exclusion_list = convert_and_parse_definition_section(definition_section)
 
 		print('Creating node...')
 		node = {}
@@ -1481,24 +1375,8 @@ def transformWorkflow(zipFileName):
 				label = str(label).replace(']','').replace('[','')
 			if isinstance(description,list):
 				description = str(description).replace(']','').replace('[','')
-					#occurrence
-			occurrence = ''
-			if code in occurr_dic.keys():
-				occurrence = occurr_dic[code]
-			element_dict = {'code': code, 'label':label, 'type': datatype, 'description' : description, 'occurrence': occurrence}
+			element_dict = {'code': code, 'label':label, 'type': datatype, 'description' : description}
 			node['items'].append(element_dict)
-
-		# change structure_html
-		node['structure'] = ''
-		for item in node['items']:
-			if item['occurrence']!='':
-				structure_html = structure_html.replace('['+item['code']+']','['+item['code']+'] '+'<span class="dict-label">'+item['label']+'</span> '+'<span class="dict-occurrences">'+item['occurrence']+'</span>')
-			else:
-				structure_html = structure_html.replace('['+item['code']+']','['+item['code']+'] '+'<span class="dict-label">'+item['label']+'</span>')
-		while structure_html.find('  ')>-1:
-			structure_html = structure_html.replace('  ',' ')
-		structure_html = structure_html.replace('\n','')
-		node['structure'] = structure_html
 
 		#parent archetype
 		node['parent']=''
