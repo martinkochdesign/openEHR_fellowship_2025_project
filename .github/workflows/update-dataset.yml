@@ -1,4 +1,4 @@
-name: Daily Archetype Dataset Update
+name: Weekly Archetype Dataset Update
 
 on:
   schedule:
