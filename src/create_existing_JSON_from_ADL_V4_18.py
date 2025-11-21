@@ -13,12 +13,12 @@ import time
 
 # VARIABLES ******************************************************************
 # general things
-version = 'v4.17'
+version = 'v4.18'
 author = 'Martin A. Koch, PhD'
 copyright = '(c) 2025, CatSalut. Servei Català de la Salut'
 license = 'License: Apache 2.0'
 # Set headless to True if you do not need the GUI (or False if you want to use the GUI
-headless = True
+headless = False
 # Variables for running script headless (without GUI)
 URL = 'https://ckm.openehr.org/ckm/retrieveResources?resourceType=archetype&format=ADL&state1=INITIAL&state2=DRAFT&state3=TEAMREVIEW&state4=REVIEWSUSPENDED&state5=PUBLISHED&state6=REASSESS_DRAFT&state7=REASSESS_TEAMREVIEW&state8=REASSESS_REVIEWSUSPENDED'
 zipFileName = 'TempZipFile.zip'
@@ -159,7 +159,7 @@ def section_ADL(file_content):
 def eliminate_forbidden_characters(value):
 	characters=['\n','\t']
 	for c in characters:
-		value=value.replace(c,' ')
+		value=value.replace(c,'  ')
 	return value.strip()
 
 def control_data_type(variable, data_type, name):
@@ -172,7 +172,7 @@ def control_data_type(variable, data_type, name):
 					#print('should be string before', variable[i])
 					variable[i] = ' '.join(variable[i])
 					#print('should be string after', variable[i])
-					#input()
+
 		else:
 			#convert to list
 			#print(name)
@@ -180,7 +180,7 @@ def control_data_type(variable, data_type, name):
 			variable = variable.split(',')
 			#variable = list(variable)# or is it variable = [variable] ?
 			#print('should be list after', variable)
-			#input()
+
 	elif data_type == 'str':
 		if isinstance(variable,str):
 			pass
@@ -189,7 +189,7 @@ def control_data_type(variable, data_type, name):
 			#print('should be string before', variable)
 			variable = ' '.join(variable)
 			#print('should be string after', variable)
-			#input()
+
 	return variable
 
 def check_node_attribute_data_types(node):
@@ -263,9 +263,6 @@ def convert_section_to_JSON(section):
 
 	# SINLGLE LINES *******************************************************************************
 	# SINGLE LINE LIST : key = <"ABC", "DEF"> <---- DO THIS BEFORE SINGLE LINES WITHOUT LISTS!!!!!!
-	#pattern = re.compile(r'(([A-Za-z_]+)\s=\s<("[^"]+",\s".*?")>\n)')
-	#pattern = re.compile(r'(([A-Za-z_]+)\s=\s<("[^"]+".+?,.+?".*?")>\n)')
-	#pattern = re.compile(r'(([A-Za-z_]+)\s=\s<("[^"]+".*,.+?".*?")>\n)')
 	pattern = re.compile(r'(([A-Za-z_]+)\s=\s<("[^"]+".*,?".*?")>\n)')
 
 	matches = pattern.finditer(file_content)
@@ -1391,6 +1388,8 @@ def transformWorkflow(zipFileName):
 				node['purpose'] = ''
 			# use
 			if 'use' in description_JSON['details'][current_language].keys():
+				#print(description_JSON['details'][current_language]['use'])
+				#input()
 				node['use'] = str(description_JSON['details'][current_language]['use'])
 			else:
 				node['use'] = ''
