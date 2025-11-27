@@ -13,7 +13,7 @@ import time
 
 # VARIABLES ******************************************************************
 # general things
-version = 'v4.19'
+version = 'v4.20'
 author = 'Martin A. Koch, PhD'
 copyright = '(c) 2025, CatSalut. Servei Català de la Salut'
 license = 'License: Apache 2.0'
@@ -1037,7 +1037,7 @@ def parse_definition_for_elements(temp_JSON, element_list):
 							datatypes = str(list(temp_JSON[key]['value'].keys()))
 							pattern = re.compile(r'\[\'[0-9]+\',*')
 							matches = pattern.finditer(datatypes)
-							if matches:
+							if not matches:
 								datatypes = "['DV_ORDINAL']"
 							element_list.append((datatypes,code))
 						else:
@@ -1163,6 +1163,12 @@ def convert_and_parse_definition_section(definition_section):
 	exclusion_list = []
 	exclusion_list = parse_definition_for_inclusions(definition_JSON, exclusion_list, 'exclude')
 	occurr_dic = get_occurrences_from_definition(definition_text)
+
+	#print(definition_JSON)
+	#input()
+
+	#print(element_list)
+	#input()
 
 	return element_list, inclusion_list, exclusion_list, occurr_dic, structure_html
 
