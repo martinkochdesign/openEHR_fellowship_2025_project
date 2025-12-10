@@ -7,7 +7,7 @@ on:
   workflow_dispatch:      # Allow manual trigger from GitHub UI
 
 jobs:
-  update-dataset:
+  update-glossary-dataset:
     runs-on: ubuntu-latest
 
     steps:
@@ -31,6 +31,6 @@ jobs:
         run: |
           git config --global user.name "github-actions"
           git config --global user.email "github-actions@github.com"
-          git add dataset.js
+          git add glossary_data.js
           git commit -m "Automated daily dataset update" || echo "No changes to commit"
           git push
