@@ -1,0 +1,481 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>The Great Archetype Escape</title>
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@700&display=swap" rel="stylesheet">
+  <style>
+    body {
+      margin: 0;
+      background: linear-gradient(120deg, #1a1a2e 0%, #0f3460 100%);
+      color: #fff;
+      font-family: 'Orbitron', Arial, sans-serif;
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+    #gameContainer {
+      max-width: 1280px;
+      margin: 0 auto;
+      padding: 30px 0 0 0;
+      text-align: center;
+    }
+    h2 {
+      font-size: 2.5em;
+      letter-spacing: 2px;
+      color: #ff9100;
+      text-shadow: 0 2px 10px #000, 0 0 20px #ff9100;
+      margin-bottom: 0.2em;
+    }
+    .desc {
+      background: rgba(20,20,40,0.8);
+      border-radius: 18px;
+      padding: 24px 40px 24px 40px;
+      margin: 0 auto 30px auto;
+      max-width: 1200px;
+      box-shadow: 0 4px 32px #0008;
+      font-size: 1.05em;
+      color: #e0e0e0;
+      text-align: left;
+    }
+    .desc ul {
+      margin: 0 0 0 1.5em;
+      padding: 0;
+      list-style: none;
+    }
+    .desc ul li {
+      margin-bottom: 0.5em;
+      position: relative;
+      padding-left: 1.5em;
+    }
+    .desc ul li:before {
+      content: "🌟";
+      position: absolute;
+      left: 0;
+      color: #ff9100;
+      font-size: 1.1em;
+    }
+    #gameCanvas {
+      background: linear-gradient(180deg, #23234e 0%, #222 100%);
+      display: block;
+      margin: 30px auto 0 auto;
+      border: 4px solid #ff9100;
+      border-radius: 18px;
+      box-shadow: 0 8px 32px #000a;
+      transition: box-shadow 0.2s;
+    }
+    #startBtn {
+      display: block;
+      margin: 30px auto 0 auto;
+      padding: 16px 40px;
+      font-size: 1.1em;
+      font-family: 'Orbitron', Arial, sans-serif;
+      background: linear-gradient(90deg, #ff9100 0%, #ff3c00 100%);
+      color: #fff;
+      border: none;
+      border-radius: 12px;
+      box-shadow: 0 2px 16px #ff910088;
+      cursor: pointer;
+      letter-spacing: 2px;
+      transition: background 0.2s, box-shadow 0.2s;
+    }
+    #startBtn:hover {
+      background: linear-gradient(90deg, #ff3c00 0%, #ff9100 100%);
+      box-shadow: 0 4px 32px #ff9100cc;
+    }
+    @media (max-width: 900px) {
+      #gameCanvas { width: 98vw !important; }
+      .desc { padding: 18px 8vw; }
+    }
+  </style>
+</head>
+<body>
+  <div id="gameContainer">
+    <h2>🏃‍♂️ The Great Archetype Escape!</h2>
+    <div class="desc">
+      In a world where <strong>clinical health records</strong> are plagued by chaos, one brave orange <span style="font-weight:bold;">“a”</span> sets out on a quest for <em>interoperability</em> and <em>clarity</em>!
+      <br><br>
+      Guide our heroic openEHR archetype as it dashes through the treacherous landscape of healthcare IT, dodging its eternal nemeses:
+      <ul>
+        <li><strong>Incompatibilities</strong> – the potholes of progress</li>
+        <li><strong>Closed Systems</strong> – the brick walls of innovation</li>
+        <li><strong>Proprietary Formats</strong> – the quicksand of confusion</li>
+        <li><strong>Legacy Databases</strong> – the fossils that refuse to go extinct</li>
+      </ul>
+      Will our archetype outrun the obstacles and reach the promised land of <span style="color: #00ffb0; font-weight: bold;">semantic success</span>? Or will it be lost forever in the <span style="font-weight: bold; color: #ff3c00;">swamp of siloed data</span>? The future of open health records is in your hands!
+      <br><br>
+      <span style="font-style: italic;">
+        Press <strong>space</strong> to jump, avoid the potholes and brick walls, collect fossils for extra points, and remember: in the world of health IT, only the interoperable survive!
+      </span>
+    </div>
+    <canvas id="gameCanvas" width="1200" height="320"></canvas>
+    <button id="startBtn" >START GAME</button>
+  </div>
+  <script>
+    // --- CONFIGURATION ---
+    // Use emoji for demo; swap with PNGs for production!
+    const walkFrames = [
+      '../images/walk1.png', // frame 1
+      '../images/walk2.png', // frame 2 (replace with your own)
+    ];
+    const jumpFrame = '../images/jump.png'; // replace with your own
+
+    // --- GAME VARIABLES ---
+    const canvas = document.getElementById('gameCanvas');
+    const ctx = canvas.getContext('2d');
+    let gameActive = false;
+    let score = 0;
+    let speed = 7;
+    let gravity = 0.6;
+    let jumpPower = -13;
+    let groundY = canvas.height - 40;
+
+    // --- CHARACTER ---
+    let char = {
+      x: 80,
+      y: groundY - 60,
+      vy: 0,
+      width: 60,
+      height: 60,
+      frame: 0,
+      frameTick: 0,
+      jumping: false,
+      walkImgs: walkFrames,
+      jumpImg: jumpFrame,
+      slowTimer: 0,
+    };
+
+    // --- OBSTACLES & COLLECTIBLES ---
+    const OBSTACLE_TYPES = [
+      {type: 'wall', color: '#ff3c00', icon: '🧱'},         // Closed System
+      {type: 'pothole', color: '#222', icon: '🕳️'},        // Incompatibility
+      {type: 'quicksand', color: '#ffd600', icon: '🏜️'},    // Proprietary Format
+      {type: 'fossil', color: '#bdbdbd', icon: '🦴'},       // Legacy DB
+    ];
+    let obstacles = [];
+
+    function loadImage(src) {
+      return new Promise((resolve) => {
+        const img = new Image();
+        img.src = src;
+        img.onload = () => resolve(img);
+      });
+    }
+
+    // --- LOAD IMAGES (for PNGs, not used in emoji demo) ---
+    async function loadAssets() {
+      char.walkImgs = await Promise.all(walkFrames.map(loadImage));
+      char.jumpImg = await loadImage(jumpFrame);
+    }
+
+    // --- GAME LOOP ---
+    function resetGame() {
+      score = 0;
+      speed = 7;
+      char.y = groundY - char.height;
+      char.vy = 0;
+      char.jumping = false;
+      char.slowTimer = 0;
+      obstacles = [];
+    }
+
+    function spawnObstacle() {
+      // Randomly pick type
+      let r = Math.random();
+      let typeObj;
+      if (r < 0.28) typeObj = OBSTACLE_TYPES[0]; // wall
+      else if (r < 0.53) typeObj = OBSTACLE_TYPES[1]; // pothole
+      else if (r < 0.78) typeObj = OBSTACLE_TYPES[2]; // quicksand
+      else typeObj = OBSTACLE_TYPES[3]; // fossil
+
+      let obs = {
+        type: typeObj.type,
+        color: typeObj.color,
+        icon: typeObj.icon,
+        x: canvas.width + Math.random()*100,
+        width: 0,
+        height: 0,
+        y: 0,
+        collected: false,
+        slowApplied: false,
+      };
+
+      if (obs.type === 'wall') {
+        obs.width = 32 + Math.random()*24;
+        obs.height = 60 + Math.random()*30;
+        obs.y = groundY;
+      } else if (obs.type === 'pothole') {
+        obs.width = 60 + Math.random()*40;
+        obs.height = 18;
+        obs.y = groundY + 4; // below ground
+      } else if (obs.type === 'quicksand') {
+        obs.width = 60 + Math.random()*40;
+        obs.height = 22;
+        obs.y = groundY + 2;
+      } else if (obs.type === 'fossil') {
+        obs.width = 36;
+        obs.height = 36;
+        obs.y = groundY - obs.height - 8 - Math.random()*30;
+      }
+      obstacles.push(obs);
+    }
+
+    function update() {
+      // Character physics
+      if (char.jumping) {
+        char.vy += gravity;
+        char.y += char.vy;
+        if (char.y >= groundY - char.height) {
+          char.y = groundY - char.height;
+          char.vy = 0;
+          char.jumping = false;
+        }
+      } else {
+        char.frameTick++;
+        if (char.frameTick > 7) {
+          char.frame = (char.frame + 1) % char.walkImgs.length;
+          char.frameTick = 0;
+        }
+      }
+
+      // Obstacles
+      for (let obs of obstacles) {
+        obs.x -= (char.slowTimer > 0 ? speed * 0.5 : speed);
+      }
+      if (obstacles.length === 0 || obstacles[obstacles.length - 1].x < 400) {
+        if (Math.random() < 0.5 + speed * 0.002) spawnObstacle();
+      }
+      obstacles = obstacles.filter(obs => obs.x + obs.width > 0 && !obs.collected);
+
+      // Collision & interaction
+      for (let obs of obstacles) {
+        if (obs.type === 'wall') {
+          // Wall collision
+          if (
+            char.x + char.width > obs.x &&
+            char.x < obs.x + obs.width &&
+            char.y + char.height > obs.y - obs.height
+          ) {
+            gameActive = false;
+          }
+        } else if (obs.type === 'pothole') {
+          // If character is on ground and over pothole, game over
+          if (
+            char.y + char.height >= groundY &&
+            char.x + char.width > obs.x &&
+            char.x < obs.x + obs.width
+          ) {
+            gameActive = false;
+          }
+        } else if (obs.type === 'quicksand') {
+          // If character is on ground and over quicksand, slow
+          if (
+            char.y + char.height >= groundY &&
+            char.x + char.width > obs.x &&
+            char.x < obs.x + obs.width
+          ) {
+            if (!obs.slowApplied) {
+              char.slowTimer = 60; // 1 second slow
+              obs.slowApplied = true;
+              score -= 100;
+            }
+          }
+        } else if (obs.type === 'fossil') {
+          // If character overlaps fossil, collect
+          if (
+            !obs.collected &&
+            char.x + char.width > obs.x &&
+            char.x < obs.x + obs.width &&
+            char.y + char.height > obs.y &&
+            char.y < obs.y + obs.height
+          ) {
+            obs.collected = true;
+            score += 200;
+            // Optional: play sound or show effect
+          }
+        }
+      }
+
+      // Slow timer
+      if (char.slowTimer > 0) char.slowTimer--;
+      // Score & speed
+      if (gameActive) {
+        score++;
+        if (score % 200 === 0) speed += 0.5;
+      }
+    }
+
+    function drawBackground() {
+      // Animated gradient or shapes
+      let t = Date.now() * 0.0002;
+      for (let i = 0; i < 12; i++) {
+        ctx.save();
+        ctx.globalAlpha = 0.08;
+        ctx.beginPath();
+        ctx.arc(
+          200 + Math.sin(t + i) * 600,
+          120 + Math.cos(t + i * 1.2) * 120,
+          120 + Math.sin(t * 2 + i) * 40,
+          0, Math.PI * 2
+        );
+        ctx.fillStyle = i % 2 === 0 ? "#ff9100" : "#00ffb0";
+        ctx.fill();
+        ctx.restore();
+      }
+    }
+
+    function draw() {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      drawBackground();
+
+      // Ground
+      ctx.save();
+      ctx.fillStyle = "#444";
+      ctx.shadowColor = "#ff9100";
+      ctx.shadowBlur = 12;
+      ctx.fillRect(0, groundY, canvas.width, 8);
+      ctx.restore();
+
+      // Obstacles
+      for (let obs of obstacles) {
+        if (obs.type === 'wall') {
+          ctx.save();
+          ctx.fillStyle = obs.color;
+          ctx.shadowColor = "#ff9100";
+          ctx.shadowBlur = 10;
+          ctx.fillRect(obs.x, obs.y - obs.height, obs.width, obs.height);
+          ctx.font = "32px serif";
+          ctx.textAlign = "center";
+          ctx.textBaseline = "bottom";
+          ctx.fillText(obs.icon, obs.x + obs.width/2, obs.y - obs.height - 2);
+          ctx.restore();
+        } else if (obs.type === 'pothole') {
+          ctx.save();
+          ctx.fillStyle = obs.color;
+          ctx.beginPath();
+          ctx.ellipse(obs.x + obs.width/2, obs.y + 8, obs.width/2, 10, 0, 0, Math.PI*2);
+          ctx.fill();
+          ctx.font = "28px serif";
+          ctx.textAlign = "center";
+          ctx.textBaseline = "middle";
+          ctx.fillText(obs.icon, obs.x + obs.width/2, obs.y + 8);
+          ctx.restore();
+        } else if (obs.type === 'quicksand') {
+          ctx.save();
+          ctx.fillStyle = obs.color;
+          ctx.globalAlpha = 0.7;
+          ctx.fillRect(obs.x, obs.y, obs.width, obs.height);
+          ctx.globalAlpha = 1;
+          ctx.font = "28px serif";
+          ctx.textAlign = "center";
+          ctx.textBaseline = "bottom";
+          ctx.fillText(obs.icon, obs.x + obs.width/2, obs.y + obs.height - 2);
+          ctx.restore();
+        } else if (obs.type === 'fossil' && !obs.collected) {
+          ctx.save();
+          ctx.beginPath();
+          ctx.arc(obs.x + obs.width/2, obs.y + obs.height/2, obs.width/2, 0, Math.PI*2);
+          ctx.fillStyle = obs.color;
+          ctx.shadowColor = "#fff";
+          ctx.shadowBlur = 8;
+          ctx.fill();
+          ctx.font = "30px serif";
+          ctx.textAlign = "center";
+          ctx.textBaseline = "middle";
+          ctx.fillStyle = "#333";
+          ctx.fillText(obs.icon, obs.x + obs.width/2, obs.y + obs.height/2);
+          ctx.restore();
+        }
+      }
+
+      // Character
+      /*ctx.save();
+      ctx.font = "54px serif";
+      ctx.textAlign = "center";
+      ctx.textBaseline = "middle";
+      ctx.shadowColor = "#ff9100";
+      ctx.shadowBlur = 16;
+      ctx.fillText(char.jumping ? char.jumpImg : char.walkImgs[char.frame], char.x + char.width/2, char.y + char.height/2);
+      ctx.restore();*/
+
+            // Character
+            if (char.jumping) {
+        ctx.drawImage(char.jumpImg, char.x, char.y, char.width, char.height);
+      } else {
+        ctx.drawImage(char.walkImgs[char.frame], char.x, char.y, char.width, char.height);
+      }
+
+      // Score
+      ctx.save();
+      ctx.font = 'bold 28px Orbitron, monospace';
+      ctx.textAlign = 'left';
+      ctx.shadowColor = "#00ffb0";
+      ctx.shadowBlur = 10;
+      ctx.fillStyle = '#fff';
+      ctx.fillText('SCORE: ' + score, 24, 44);
+      ctx.restore();
+
+      // Slow effect
+      if (char.slowTimer > 0) {
+        ctx.save();
+        ctx.globalAlpha = 0.18 + 0.08*Math.sin(Date.now()/80);
+        ctx.fillStyle = "#ffd600";
+        ctx.fillRect(0, 0, canvas.width, canvas.height);
+        ctx.restore();
+      }
+
+      // Game Over overlay
+      if (!gameActive && score > 0) {
+        ctx.save();
+        ctx.globalAlpha = 0.85;
+        ctx.fillStyle = '#1a1a2e';
+        ctx.fillRect(0, 0, canvas.width, canvas.height);
+        ctx.globalAlpha = 1;
+        ctx.font = 'bold 54px Orbitron, sans-serif';
+        ctx.textAlign = 'center';
+        ctx.shadowColor = "#ff9100";
+        ctx.shadowBlur = 24;
+        ctx.fillStyle = '#ff9100';
+        ctx.fillText('GAME OVER!', canvas.width/2,  canvas.height/2 - 30);
+        ctx.font = '28px Orbitron, sans-serif';
+        ctx.shadowBlur = 0;
+        ctx.fillStyle = '#fff';
+        ctx.fillText('Press Button to Restart', canvas.width/2,  canvas.height/2 + 30);
+        ctx.restore();
+      }
+    }
+
+    function gameLoop() {
+      if (gameActive) update();
+      draw();
+      requestAnimationFrame(gameLoop);
+    }
+
+    // --- CONTROLS ---
+    document.addEventListener('keydown', (e) => {
+      //if (e.code === 'Space' || e.code === 'ArrowUp') {
+    if (e.code === 'Space') {
+        if (!char.jumping && gameActive) {
+          char.vy = jumpPower;
+          char.jumping = true;
+        } else if (!gameActive) {
+          resetGame();
+          gameActive = true;
+        }
+      }
+    });
+
+    document.getElementById('startBtn').onclick = () => {
+      if (!gameActive) {
+        resetGame();
+        gameActive = true;
+      }
+    };
+
+    // --- INIT ---
+    loadAssets().then(() => {
+      draw();
+      gameLoop();
+    });
+  </script>
+</body>
+</html>

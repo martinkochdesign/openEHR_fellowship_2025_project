@@ -1,0 +1,2410 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<title>Archetype Companion Manual</title>
+	<meta name="viewport" content="width=1024">
+	<meta name="author" content="Martin A. Koch, PhD">
+	<meta name="license" content="CC BY 4.0">
+	<style>
+		html {
+			scroll-behavior: smooth;
+		}
+
+		body {
+			margin: 0;
+			font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+			background: #f8f9fa;
+			color: #222;
+		}
+
+		.container {
+			display: flex;
+			height: 100vh;
+		}
+
+		nav {
+			width: 280px;
+			background: #222e3a;
+			color: #fff;
+			padding: 0;
+			overflow-y: auto;
+			border-right: 1px solid #e0e0e0;
+			background-image: linear-gradient(45deg, rgb(90, 155, 215) 0%, rgb(180, 210, 235) 50%, rgb(90, 155, 215) 100%);
+			background-size: cover;
+			background-position: center;
+			background-repeat: repeat-x;
+			color: black;
+		}
+
+		nav h2 {
+			font-size: 1.2em;
+			margin: 1.2em 1em 0.5em 1em;
+			color: #a6b1c2;
+			color: black;
+			letter-spacing: 1px;
+		}
+
+		nav ul {
+			list-style: none;
+			padding: 0 0 2em 0;
+			margin: 0;
+		}
+
+		nav ul li {
+			margin: 0;
+		}
+
+		nav ul li a {
+			display: block;
+			/*padding: 0.7em 1.5em;*/
+			padding: 0.4em 0.8em;
+			color: #cfd8e3;
+			color: black;
+			text-decoration: none;
+			border-left: 4px solid transparent;
+			transition: background 0.2s, border-color 0.2s, color 0.2s;
+			font-size: 1em;
+		}
+
+		nav ul li a.active,
+		nav ul li a:hover {
+			background: #31405a;
+			color: #fff;
+			border-left: 4px solid #4f8cff;
+		}
+
+		main {
+			flex: 1;
+			padding: 2em 3em;
+			overflow-y: auto;
+			background: #fff;
+		}
+
+		main h1,
+		main h2,
+		main h2,
+		main h3 {
+			margin-top: 0.25em;
+			margin-bottom: 0.25em;
+			font-weight: 600;
+		}
+
+		main h1 {
+			font-size: 2.2em;
+			color: #31405a;
+		}
+
+		main h2 {
+			font-size: 1.5em;
+			color: #4f8cff;
+		}
+
+		main h2 {
+			font-size: 1.2em;
+			color: #31405a;
+		}
+
+		main h3 {
+			font-size: 1em;
+			color: #4f8cff;
+		}
+
+		main p,
+		main ul,
+		main ol {
+			font-size: 1.05em;
+			line-height: 1.7;
+			margin-bottom: 1.2em;
+		}
+
+
+
+		.snazzy-table-container {
+			display: flex;
+			justify-content: center;
+			margin: 2em 0;
+		}
+
+		.snazzy-table {
+			border-collapse: collapse;
+			min-width: 600px;
+			background: #fff;
+			border-radius: 12px;
+			box-shadow: 0 4px 24px rgba(0, 0, 0, 0.08);
+			overflow: hidden;
+			font-family: 'Segoe UI', Arial, sans-serif;
+		}
+
+		.snazzy-table th,
+		.snazzy-table td {
+			padding: 14px 20px;
+			text-align: left;
+			border-bottom: 1px solid #e0e0e0;
+			vertical-align: top;
+		}
+
+		.snazzy-table th {
+			background: #1976d2;
+			color: #fff;
+			font-size: 1.1em;
+			letter-spacing: 0.03em;
+		}
+
+		.snazzy-table tr:nth-child(even) {
+			background: #f6f8fa;
+		}
+
+		.snazzy-table tr:hover {
+			background: #e3f2fd;
+			transition: background 0.2s;
+		}
+
+		.snazzy-table td small {
+			color: #555;
+			font-size: 0.95em;
+		}
+
+		@media (max-width: 900px) {
+			.container {
+				flex-direction: column;
+			}
+
+			nav {
+				width: 100%;
+				height: auto;
+				border-right: none;
+				border-bottom: 1px solid #e0e0e0;
+			}
+
+			main {
+				padding: 1em;
+			}
+		}
+
+		.video-gallery {
+			display: flex;
+			flex-wrap: wrap;
+			gap: 24px;
+		}
+
+		.video-gallery figure {
+			margin: 0;
+			width: 500px;
+		}
+
+		.video-gallery figcaption {
+			font-weight: bold;
+			margin-bottom: 8px;
+			text-align: center;
+		}
+	</style>
+</head>
+
+<body>
+	<div class="container">
+		<nav>
+			<h2>Table of Contents</h2>
+			<ul id="toc" />
+		</nav>
+
+
+		<main id="manual-content">
+			<div style="text-align: right;">
+				<img src="images/logo.png" width="150">
+			</div>
+
+			<h1 id="title">Archetype Companion Manual</h1>
+			<p><em><strong>Author:</strong> Martin A. Koch, PhD</em>
+				<br>
+				<em><strong>Copyright:</strong> 2025, CatSalut. Servei Català de la Salut</em>
+				<br>
+				<em><strong>Version:</strong> 0.8.1 (Last updated: 2026-01-12)</em>
+			</p>
+
+			<p style="text-align: center; line-height: 250%;">
+				<em>This manual and the Archetype Companion application have been developed during the openEHR
+					fellowship 2025 in collaboration with
+					<br>
+					<img src="images/openehr_logo.png" alt="" height="30"> &nbsp;and&nbsp; <img
+						src="images/salut_logo.png" alt="" height="30">.</em>
+			</p>
+
+			<h2 id="license">Licence</h2>
+			<p>This manual is licensed under the Apache Licence, Version 2.0 (the "Licence"); you may not use this
+				manual except in compliance with the Licence. You may obtain a copy of the Licence at:</p>
+			<p>
+				<a href="http://www.apache.org/licenses/LICENSE-2.0"
+					target="_blank">http://www.apache.org/licenses/LICENSE-2.0</a>
+			</p>
+
+			<p>This manual is provided “as is”. The information contained herein is subject to change without notice. No
+				warranty of any kind, either express or implied, is made in relation to the accuracy, reliability, or
+				fitness for a particular purpose of this document. The authors and publishers shall not be liable for
+				any errors or omissions, or for any incidental or consequential damages arising from the use of this
+				material.</p>
+			<hr>
+
+			<h2>Welcome</h2>
+			<p>Welcome to the openEHR Archetype Companion! This application was developed in the course of the openEHR
+				fellowship programme 2025. This platform helps you search, plan, and visualise archetypes for your
+				clinical modelling projects. Whether you are new or experienced, we hope that this application can help
+				you to model more efficiently.</p>
+
+			<p>This tool is designed for clinical modellers and informaticians who need to find, organise, and manage
+				openEHR archetypes. The aim is to streamline your workflow by providing a fast search for existing
+				archetypes and visualising dependencies.</p>
+			<p>
+				<strong>Search archetypes</strong> - You can quickly find archetypes from a database, using filters and
+				keywords.
+			</p>
+			<p>
+				<strong>Visualise archetype dependencies</strong> - The visualisation features of the tool help you
+				understand parent-child relationships, inclusions, exclusions, and similar archetypes at a glance. You
+				can even get recommendations for similar or related archetypes.
+			</p>
+			<p>
+				<strong>Plan archetypes and template projects</strong> - Using the collection feature, you can organise
+				archetypes, pre-plan new archetypes, interconnect them, and assign them to previously defined data
+				elements of your project.
+			</p>
+
+
+			<section id="video-tutorials">
+				<h2>Video Tutorials</h2>
+				<div class="video-gallery">
+					<figure>
+						<figcaption>1. Overview of the application</figcaption>
+						<video controls width="480" preload="none">
+							<source src="videos/application_overview.webm" type="video/webm">
+							Your browser does not support the video tag.
+						</video>
+					</figure>
+					<figure>
+						<figcaption>2. GUI Tutorial</figcaption>
+						<video controls width="480" preload="none">
+							<source src="videos/tutorial_GUI.webm" type="video/webm">
+							Your browser does not support the video tag.
+						</video>
+					</figure>
+					<figure>
+						<figcaption>3. Project Tutorial</figcaption>
+						<video controls width="480" preload="none">
+							<source src="videos/tutorial_project.webm" type="video/webm">
+							Your browser does not support the video tag.
+						</video>
+					</figure>
+					<figure>
+						<figcaption>4. Checklist Tutorial</figcaption>
+						<video controls width="480" preload="none">
+							<source src="videos/tutorial_checklist.webm" type="video/webm">
+							Your browser does not support the video tag.
+						</video>
+					</figure>
+					<figure>
+						<figcaption>5. Search Tutorial Part 1</figcaption>
+						<video controls width="480" preload="none">
+							<source src="videos/tutorial_search_part_1.webm" type="video/webm">
+							Your browser does not support the video tag.
+						</video>
+					</figure>
+					<figure>
+						<figcaption>6. Search Syntax Tutorial</figcaption>
+						<video controls width="480" preload="none">
+							<source src="videos/tutorial_search_syntax.webm" type="video/webm">
+							Your browser does not support the video tag.
+						</video>
+					</figure>
+					<figure>
+						<figcaption>7. Search Tutorial Part 2</figcaption>
+						<video controls width="480" preload="none">
+							<source src="videos/tutorial_search_part_2.webm" type="video/webm">
+							Your browser does not support the video tag.
+						</video>
+					</figure>
+					<figure>
+						<figcaption>8. Archetype Placeholder Tutorial</figcaption>
+						<video controls width="480" preload="none">
+							<source src="videos/tutorial_archetype_placeholder.webm" type="video/webm">
+							Your browser does not support the video tag.
+						</video>
+					</figure>
+					<figure>
+						<figcaption>9. Template Planner Tutorial</figcaption>
+						<video controls width="480" preload="none">
+							<source src="videos/tutorial_template_planner.webm" type="video/webm">
+							Your browser does not support the video tag.
+						</video>
+					</figure>
+				</div>
+			</section>
+
+
+			<h2>Example Projects</h2>
+			<p>
+				To help you get started, we provide a selection of example project files. These examples are designed for you to explore and experiment with, so you can try out features and workflows without putting your own projects or data at risk. Feel free to use, modify, or test these files as you learn more about the system.
+			</p>
+			<p>
+				These example projects are loosely based on existing openEHR templates. They are provided for illustrative and educational purposes only. No copyright ownership is claimed over the original openEHR templates or materials. The examples may be incomplete, simplified, or adapted, and should not be considered authoritative or comprehensive representations of the original templates. For official and complete versions, please refer to the original openEHR resources.
+			</p>
+
+		<p>
+			You can download individual example files directly:
+			<ul>
+
+				
+			<li>
+				<a href="docs/example_projects/example_vital_signs2_project.json" download>
+					example_vital_signs2_project.json
+				</a>
+			</li>
+			<!--
+			<li>
+				<a href="docs/example_projects/example_covid-19_likelihood_assessment_project.json" download>
+				example_covid-19_likelihood_assessment_project.json
+				</a>
+			</li>
+			-->
+
+			<li>
+				<a href="docs/example_projects/example_generic_lab_test_result_example_project.json" download>
+					example_generic_lab_test_result_example_project.json
+				</a>
+			</li>
+			<!--
+			<li>
+				<a href="docs/example_projects/example_international_patient_summary_project.json" download>
+					example_international_patient_summary_project.json
+				</a>
+			</li>
+			<li>
+				<a href="docs/example_projects/example_slovenia_res_revision_hip_arthroplasty_report_project.json" download>
+					example_slovenia_res_revision_hip_arthroplasty_report_project.json
+				</a>
+			</li>-->
+			<li>
+				<a href="docs/example_projects/example_ear_primary_hip_arthroplasty_report_project.json" download>
+					example_ear_primary_hip_arthroplasty_report_project.json
+				</a>
+			</li>
+			<!--
+			<li>
+				<a href="docs/example_projects/example_eprescription_epsos_contsys_project.json" download>
+					example_eprescription_epsos_contsys_project.json
+				</a>
+			</li>
+			-->
+
+
+
+			
+
+			</ul>
+		</p>
+
+
+
+
+
+			<h2>A brief overview of the interface</h2>
+			<p>
+				When opening the application, the user is presented with a graphical interface.
+			</p>
+			<div style="text-align: center;">
+				<img src="images/tut_ovw_user_interface.png" width="900">
+				<br>
+				<small>
+					The archetype companion user interface.
+				</small>
+			</div>
+			<p>
+				The following image highlights the location of the current project name at the top of the interface.
+			</p>
+			<div style="text-align: center;">
+				<img src="images/tut_ovw_project_name.png" width="800">
+				<br>
+				<small>
+					The current project name in the top of the interface.
+				</small>
+			</div>
+			<p>
+				Here you can see the section of the interface that provides fast access to essential functions. These
+				quick-access buttons allow users to perform frequent actions and access important tools without
+				unnecessary steps.
+			</p>
+			<div style="text-align: center;">
+				<img src="images/tut_ovw_fast_access_functions.png" width="800">
+				<br>
+				<small>
+					Easy access functions on the top of the interface.
+				</small>
+			</div>
+			<p>
+				In the centre of the interface you will find the workspace area, where users can organise their work
+				using draggable and resizable windows.
+			</p>
+			<div style="text-align: center;">
+				<img src="images/tut_ovw_workspace.png" width="600">
+				<br>
+				<small>
+					The workspace with draggable and resizable windows.
+				</small>
+			</div>
+			<p>
+				At the bottom of the interface you will encounter the version information panel. It displays the current
+				version of the Archetype Companion tool, as well as the source and extraction date of the archetype
+				database in use.
+			</p>
+			<div style="text-align: center;">
+				<img src="images/tut_ovw_version_info.png" width="800">
+				<br>
+				<small>
+					The version of the companion, source and extraction date of the archetype database.
+				</small>
+			</div>
+			<p>
+				Also, at the top you will find the four predefined view configurations available in the Archetype
+				Companion. These standard views are designed to support different aspects of the application (from left
+				to right):
+			<ul>
+				<li>
+					<strong>Standard view:</strong> The standard view, ideal for browsing and viewing information about
+					archetypes.
+				</li>
+				<li>
+					<strong>Checklist editor view:</strong> This view opens the checklist editor panel to the right.
+				</li>
+				<li>
+					<strong>Search view:</strong> This view opens the search panel to the left.
+				</li>
+				<li>
+					<strong>Template planner view:</strong> This view opens the template planner panel to the left.
+				</li>
+			</ul>
+			Each view is tailored to a specific modelling or validation task, and users can switch between them as
+			needed to streamline their workflow.
+			</p>
+			<div style="text-align: center;">
+				<img src="images/tut_ovw_views.png" width="800">
+				<br>
+				<small>
+					The 4 predefined view configurations.
+				</small>
+			</div>
+
+			<p>
+				For flexible use of the different windows in the interface, the various windows can be opened with the
+				windows access bar on the right-hand side of the interface.
+			</p>
+
+			<div style="text-align: center;">
+				<img src="images/tut_ovw_button_bar.png" width="150">
+				<br>
+				<small>
+					The windows access bar.
+				</small>
+			</div>
+
+			<p>
+				The windows fast access bar can be opened with a button in the upper right of the interface.
+			</p>
+			<div style="text-align: center;">
+				<img src="images/tut_ovw_button_bar_access.png" width="150">
+				<br>
+				<small>
+					Access to the windows access bar.
+				</small>
+			</div>
+
+			<h2>About Page and Manual</h2>
+			<p>Information about the application and the archetype data can be accessed via the "About" button in the
+				upper right-hand corner of the main view.</p>
+			<div style="text-align: center;">
+				<img src="images/tut_ovw_open_about.png" width="150">
+				<br>
+				<small>
+					Open the About page.
+				</small>
+			</div>
+			<p>In the About window, an "Open manual" button allows you to open the application's online manual in a new
+				browser tab.</p>
+			<div style="text-align: center;">
+				<img src="images/tut_ovw_open_manual.png" width="600">
+				<br>
+				<small>
+					Access the manual.
+				</small>
+			</div>
+
+			<p>
+				The About page can be closed by clicking the "X" in the upper right-hand corner of the window.
+			</p>
+
+			<h2>Managing a Project</h2>
+
+			<p>All your data in the Archetype Companion is saved within a project. Projects allow you to group
+				archetypes and checklists of data elements for a specific modelling task.</p>
+
+			<p>Project options are accessible from the main view of the application via the "Project options" button.
+			</p>
+			<div style="text-align: center;">
+				<img src="images/tut_pro_options_button.png" width="150">
+				<br>
+				<small>
+					Access the project options.
+				</small>
+			</div>
+			<h3>Create a Project</h3>
+			<p>To start a new project, click “Create Project” on the right-hand side of the options menu. <strong>This
+					deletes any existing project information.</strong></p>
+			<div style="text-align: center;">
+				<img src="images/tut_pro_new_project.png" width="400">
+				<br>
+				<small>
+					Create a new project.
+				</small>
+			</div>
+			<p>
+				The project receives a default name, which you can change. You may also add a description, author, and
+				copyright information.
+			</p>
+			<div style="text-align: center;">
+				<img src="images/tut_pro_project_information.png" width="400">
+				<br>
+				<small>
+					Insert project information here.
+				</small>
+			</div>
+
+			<h3>Save a Project</h3>
+			<p>Your project is periodically saved to your browser's local storage. Note that this information may be
+				lost if your browser cache is cleared. To save your project as a JSON file, use the "Save project"
+				button in the "Project options" menu.</p>
+			<div style="text-align: center;">
+				<img src="images/tut_pro_save_project.png" width="400">
+				<br>
+				<small>
+					Save project from options window.
+				</small>
+			</div>
+			<p>The file is saved to your browser's download directory and contains your current project state, including
+				archetypes, checklists, and collections. The filename includes the date, time, and project name (with
+				spaces replaced by underscores). For convenience, you can also use the "Save" button in the main view.
+			</p>
+			<div style="text-align: center;">
+				<img src="images/tut_pro_save_project_main_view.png" width="150">
+				<br>
+				<small>
+					Save project from main view.
+				</small>
+			</div>
+
+			<h3>Load a Project</h3>
+			<p>To load a saved project JSON file, open the "Project options" view and use the "Load Project from JSON
+				File" button. Select your file in the standard file dialogue. The project will then be loaded into the
+				application.</p>
+			<div style="text-align: center;">
+				<img src="images/tut_pro_open_project.png" width="400">
+				<br>
+				<small>
+					Open project from file.
+				</small>
+			</div>
+
+			<h3>Delete a Project</h3>
+			<p>To delete existing project data, click “Delete/Create Project” on the right-hand side of the options menu
+				(see "Create a Project"). This deletes any existing project information and creates a new project.</p>
+
+			<h3>Create a Report</h3>
+			<p>Generate a summary report of your project by opening the "Project options" view and clicking "Create
+				report".</p>
+			<div style="text-align: center;">
+				<img src="images/tut_pro_create_report.png" width="400">
+				<br>
+				<small>Create a project report.</small>
+			</div>
+			<p>
+				This produces a simplified HTML view of all project data elements and assigned archetypes, which you can
+				print as a PDF for documentation.
+			</p>
+			<div style="text-align: center;">
+				<img src="images/tut_pro_report.png" width="600">
+				<br>
+				<small>The project report.</small>
+			</div>
+
+			<ul>
+				<li><strong>Project information:</strong> All information from the project options, including the
+					software version and the version of the archetype data.</li>
+				<li><strong>Data element checklist:</strong> Table with all data from the checklist.</li>
+				<li><strong>List of Archetypes:</strong> List of archetypes that have been assigned to data elements
+					from the checklist.</li>
+				<li><strong>New Archetypes Details:</strong> List of all new prototyped archetypes with all information
+					from the editor view.</li>
+				<li><strong>Planned Archetype Tree:</strong> Visualisation of all information from the template planner
+					in the form of a tree-like structure.</li>
+			</ul>
+
+			<p>
+				<strong>Note:</strong> When creating the report, an HTML version of the report is automatically
+				downloaded. The filename includes the time, date, and project name (which may be modified for
+				compatibility).
+			</p>
+
+			<h3>Other Project Options</h3>
+			<p>Within "Project options", you can deactivate the splash screen at start-up and activate the colour theme
+				change, which adjusts interface colours based on the time of year.</p>
+			<div style="text-align: center;">
+				<img src="images/tut_pro_additional_options.png" width="400">
+				<br>
+				<small>Additional options.</small>
+			</div>
+
+			<h2>Navigate and Search for Archetypes</h2>
+
+			<p>
+				The main function of the application is browsing and searching openEHR archetypes. In addition to an
+				easily accessible list of archetypes, this application provides a fast search engine for an openEHR
+				archetype repository, allowing you to find archetypes relevant to your needs.
+			</p>
+			<h3>Navigating the Archetype List</h3>
+			<p>
+				The information for archetypes extracted from a repository is presented as an alphabetised "Existing
+				archetypes" list of archetype IDs on the left-hand side of the standard view. You can scroll through the
+				list using the mouse wheel while hovering over it, or by using the scroll bar on the right-hand side.
+			</p>
+			<div style="text-align: center;">
+				<img src="images/tot_arc_position.png" width="900">
+				<br>
+				<small>
+					Default position of the "existing archetype" list.
+				</small>
+			</div>
+			<p>
+				Clicking on an archetype in the list sets it as the selected archetype. As a result, the archetype's
+				data is loaded into the information window, and the visualisation updates to the new archetype if you
+				are in "Archetype" or "Similar" view mode. The active archetype is marked in salmon colour in the list.
+			</p>
+			<p>
+				The selected archetype can be added to the collection view using the "Add to collection" button.
+				<em>Please refer to the Managing a Collection section for more information about collections.</em>
+			</p>
+			<div style="text-align: center;">
+				<img src="images/tut_arc_add_to_collection.png" width="250">
+				<br>
+				<small>
+					Move the selected archetype to the collection.
+				</small>
+			</div>
+			<p>
+				In the bottom right of the list, a number shows how many archetypes from the database are currently
+				displayed. This number may vary depending on filters and how many archetypes have been added to the
+				collection list.
+			</p>
+			<div style="text-align: center;">
+				<img src="images/tut_arc_number_archetypes.png" width="250">
+				<br>
+				<small>
+					How many archetypes from the database are in this list?
+				</small>
+			</div>
+
+
+
+			<h3>The Search View</h3>
+			<p>
+				<strong>How to Access:</strong> The dedicated archetype search can be accessed via the "Open search"
+				button in the "Existing archetype" list or the "Search view" button at the top right of the main
+				view. In the search view, you have the archetype list as in the "Existing archetypes" list, and you can
+				select and transfer archetypes to the collection in the same way.
+			</p>
+			<div style="text-align: center;">
+				<img src="images/tut_arc_access_search.png" width="600">
+				<br>
+				<small>
+					Access the search panel via the archetype list or fast access button.
+				</small>
+			</div>
+			<p>
+				<strong>Add Filter:</strong> There are different filter options. First, all archetypes can be filtered
+				by class by selecting the desired class in the dropdown menu.
+			</p>
+			<div style="text-align: center;">
+				<img src="images/tut_arc_class_filter.png" width="400">
+				<br>
+				<small>
+					Select a class to filter all archetypes.
+				</small>
+			</div>
+			<p>
+				Second, archetypes can be filtered by text: enter your search term in the search bar, and the filter
+				will be applied automatically with every keystroke.
+			</p>
+			<div style="text-align: center;">
+				<img src="images/tut_arc_searchbar.png" width="400">
+				<br>
+				<small>
+					Enter a search term in the search bar.
+				</small>
+			</div>
+
+			<p>
+				You can add multiple filters at the same time. For example, you can search for one term in the archetype
+				name and a different term in the purpose. Select the filter by clicking on the number to the left of the
+				searchbar.
+			</p>
+			<div style="text-align: center;">
+				<img src="images/tut_arch_stack_filters.png" width="400">
+				<br>
+				<small>
+					Select another filter to create specific searches in different parts of the archetype.
+				</small>
+			</div>
+
+
+
+			<h4>Archetype Companion: Search Syntax Guide</h4>
+			<p>
+				This section explains the search syntax used in the Archetype Companion. Searching for archetypes
+				supports basic Boolean operators, such as <strong>AND</strong>, <strong>OR</strong>, and
+				<strong>NOT</strong>.
+			</p>
+
+			<h5>General Considerations</h5>
+			<ul>
+				<li>
+					<strong>Single Term Search:</strong> Type a term (e.g., <code>Location</code>) into the search bar.
+					The search is not case sensitive, except for Boolean operators, which must be in uppercase.
+				</li>
+				<li>
+					<strong>Highlighting:</strong> The searched term is highlighted in the archetype information.
+				</li>
+				<li>
+					<strong>Multiple Terms:</strong> Add another term (e.g., <code>Geographic</code>). Both terms will
+					be highlighted separately.
+				</li>
+				<li>
+					<strong>Phrase Search:</strong> To search for an exact phrase, enclose the terms in quotation marks
+					(e.g., <code>"Geographic Location"</code>). Only the exact phrase will be highlighted.
+				</li>
+			</ul>
+
+			<h5>Using Boolean Operators</h5>
+			<ul>
+				<li>
+					<strong>AND Operator:</strong> To find archetypes containing both terms, add <code>AND</code>
+					between them (e.g., <code>Geographic AND Location</code>). This works the same as putting a space
+					between two terms.
+				</li>
+				<li>
+					<strong>OR Operator:</strong> To find archetypes containing either term, use <code>OR</code> (e.g.,
+					<code>Geographic OR Anatomical</code>).
+				</li>
+				<li>
+					<strong>Combining Operators:</strong> To combine searches, use parentheses. For example:
+					<code>(Geographic OR Anatomical) AND Location</code>. Ensure there is a space before and after the
+					parentheses for correct operation.
+				</li>
+				<li>
+					<strong>NOT Operator:</strong> To exclude drafts (version zero), add <code>AND NOT v0</code> to the
+					search bar. All version zero drafts will be excluded from the results.
+				</li>
+			</ul>
+
+			<p>
+				You can select which attributes of the archetype to search (archetype ID, name, purpose, keywords,
+				items and/or inclusion statements). Note that selecting all attributes may slow down the search. The
+				number of relevant
+				archetypes is shown beside the search bar.
+			</p>
+			<div style="text-align: center;">
+				<img src="images/tut_arc_search_attributes.png" width="400">
+				<br>
+				<small>
+					Select the attributes to be included in the filter.
+				</small>
+			</div>
+			<p>
+				<strong>Delete Filter:</strong> Whenever a filter is applied to the "Existing archetypes" list, a
+				"Delete filter" button appears beside the search bar. Clicking this button resets all filter settings.
+				This button will also appear in the "Existing archetypes" list if a filter is active.
+			</p>
+			<div style="text-align: center;">
+				<img src="images/tut_arc_delete_filter.png" width="650">
+				<br>
+				<small>
+					Resetting the filter from the search panel and "Existing archetypes" list.
+				</small>
+			</div>
+
+			<h3>Guide: Search Strategies in openEHR Archetypes for Clinical Modelling<br> <small>(Beginner
+					friendly)</small></h3>
+
+			<h4>Recommended Order of Operation</h4>
+			<ol>
+				<li>Define your data element and context.</li>
+				<li>Search for a suitable <code>COMPOSITION</code> archetype.</li>
+				<li>Decide if <code>SECTION</code>s are needed for structure.</li>
+				<li>Find the correct <code>ENTRY</code> archetype for your data.</li>
+				<li>Add <code>CLUSTER</code> archetypes for extra detail if needed.</li>
+				<li>(Advanced) Consider RM attributes if no archetype fits.</li>
+				<li>Document your choices and reasoning.</li>
+			</ol>
+
+			<div class="step">
+				<h4>1. Understand the Goal</h4>
+				<p>
+					The aim is to find the most suitable archetype for a specific clinical data element (for example,
+					“Blood pressure” at a patient's first GP visit).
+					This can be challenging because:
+				</p>
+				<ul>
+					<li>The archetype name may differ from your search term.</li>
+					<li>The archetype's context or class may not match your use case.</li>
+					<li>Sometimes, you need to combine (slot) archetypes together.</li>
+				</ul>
+			</div>
+			<div class="step">
+				<h4>2. Start with the Big Picture: The <code>COMPOSITION</code> Archetype</h4>
+				<p>
+					<strong>What is it?</strong> The <code>COMPOSITION</code> archetype is the top-level structure for
+					storing clinical information in openEHR.<br>
+					<strong>Why start here?</strong> It defines the context (e.g., “first visit to GP”) and provides
+					slots for adding other archetypes.
+				</p>
+				<ul>
+					<li>Search for <code>COMPOSITION</code> archetypes in the international CKM (Clinical Knowledge
+						Manager).</li>
+					<li>Read the “purpose”, “use”, and “misuse” sections to ensure it fits your scenario.</li>
+					<li>Example: For a GP visit, <code>openEHR-EHR-COMPOSITION.encounter.v1</code> is often suitable.
+					</li>
+				</ul>
+			</div>
+			<div class="step">
+				<h4>3. Add Structure: <code>SECTION</code> Archetypes (Optional)</h4>
+				<p>
+					<strong>What are they?</strong> <code>SECTION</code> archetypes help organise your data into logical
+					headings (e.g., “History”, “Examination”).<br>
+					<strong>When to use?</strong> Use <code>SECTION</code>s if it helps organise your data model, not
+					just to match a form layout.
+				</p>
+				<ul>
+					<li>Not every model needs <code>SECTION</code>s—only add them if they make data retrieval or reuse
+						easier.</li>
+					<li><strong>Tip:</strong> <code>openEHR-EHR-SECTION.adhoc.v1</code> is a flexible, general-purpose
+						section archetype.</li>
+				</ul>
+				<div class="tip">
+					The structure of your data model does not have to match the user interface or a paper form.
+				</div>
+			</div>
+			<div class="step">
+				<h4>4. Find the Right <code>ENTRY</code> Archetype</h4>
+				<p>
+					<strong>What are ENTRY archetypes?</strong> These represent the main clinical content and come in
+					several types:
+				</p>
+				<ul>
+					<li><strong>OBSERVATION:</strong> For measured or reported data (e.g., blood pressure).</li>
+					<li><strong>EVALUATION:</strong> For clinical opinions, diagnoses, or assessments.</li>
+					<li><strong>ACTION:</strong> For actions performed (e.g., procedures).</li>
+					<li><strong>INSTRUCTION:</strong> For future actions (e.g., medication orders).</li>
+					<li><strong>ADMIN_ENTRY:</strong> For administrative data (not clinical content).</li>
+				</ul>
+				<p>
+					<strong>How to choose?</strong>
+				<ul>
+					<li>Match the <code>ENTRY</code> type to your data's context.</li>
+
+
+					<table border="1" cellpadding="6" cellspacing="0">
+						<thead>
+							<tr>
+								<th>Archetype Class</th>
+								<th>Definition</th>
+								<th>Type of Document</th>
+								<th>Example Clinical Document/Data</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr>
+								<td><b>COMPOSITION</b></td>
+								<td>The top-level container for a clinical document or event, grouping all related
+									content for a clinical encounter or record entry.</td>
+								<td></td>
+								<td>Discharge summary, consultation note, progress note</td>
+							</tr>
+							<tr>
+								<td><b>SECTION</b></td>
+								<td>A logical grouping of ENTRYs within a COMPOSITION, often used to structure documents
+									into headings or chapters.</td>
+								<td></td>
+								<td>“History of Present Illness” section, “Medications” section</td>
+							</tr>
+							<tr>
+								<td><b>CLUSTER</b></td>
+								<td>A reusable structure for grouping related data elements, often used as a building
+									block within ENTRYs or other CLUSTERs.</td>
+								<td></td>
+								<td>Blood pressure measurement (systolic/diastolic), address details, device details
+								</td>
+							</tr>
+							<tr>
+								<td><b>OBSERVATION</b></td>
+								<td>Records data resulting from an observation or measurement made about the patient,
+									often with a time series.</td>
+								<td>snapshot, history, examination, measurements, test results, scores, scales</td>
+								<td>Vital signs chart, laboratory test result, blood pressure reading</td>
+							</tr>
+							<tr>
+								<td><b>EVALUATION</b></td>
+								<td>Represents a clinical opinion, assessment, or summary, typically not directly
+									measured but inferred or concluded.</td>
+								<td>opinion, synthesis, summary</td>
+								<td>Diagnosis note, risk assessment, problem list entry</td>
+							</tr>
+							<tr>
+								<td><b>INSTRUCTION</b></td>
+								<td>Specifies what should be done for the patient, including orders, plans, or requests
+									for future actions.</td>
+								<td>services, therapeutics</td>
+								<td>Medication order, care plan, referral request</td>
+							</tr>
+							<tr>
+								<td><b>ACTION</b></td>
+								<td>Records actions that have been performed, usually as a result of an INSTRUCTION.
+								</td>
+								<td>services, therapeutics</td>
+								<td>Medication administration record, procedure performed</td>
+							</tr>
+							<tr>
+								<td><b>ADMIN_ENTRY</b></td>
+								<td>Captures administrative or non-clinical information about the patient or encounter.
+								</td>
+								<td>administrative</td>
+								<td>Admission note, discharge summary, demographic update</td>
+							</tr>
+
+						</tbody>
+					</table>
+
+					<li>Do not pick an <code>ENTRY</code> just because it contains your data element—context matters!
+					</li>
+					<li>If you cannot find a perfect fit, consider requesting a new archetype or discussing changes in
+						the openEHR community.</li>
+					<li><strong>Always prefer published archetypes over drafts!</strong></li>
+				</ul>
+				</p>
+
+			</div>
+			<div class="step">
+				<h4>5. Expand Details: <code>CLUSTER</code> Archetypes</h4>
+				<p>
+					<strong>What are they?</strong> <code>CLUSTER</code> archetypes add detailed data elements to
+					<code>ENTRY</code> archetypes (e.g., a “Blood pressure” CLUSTER inside an OBSERVATION ENTRY).
+				</p>
+				<ul>
+					<li>Use <code>CLUSTER</code>s to add or expand on details when the <code>ENTRY</code> archetype
+						allows it (check for available slots).</li>
+					<li>If you could not find your data element in an <code>ENTRY</code> archetype, try to find the
+						<code>CLUSTER</code> first and then add it in an <code>ENTRY</code> that can include the
+						<code>CLUSTER</code>.</li>
+				</ul>
+			</div>
+			<div class="step">
+				<h4>6. Check the Reference Model (RM) as a Last Resort</h4>
+				<p>
+					<strong>What is it?</strong> The RM is the technical foundation of openEHR. Sometimes, data can be
+					stored in RM attributes if not covered by archetypes.
+				</p>
+				<ul>
+					<li>Only use this if you cannot find a suitable archetype or <code>CLUSTER</code>.</li>
+					<li>This requires advanced knowledge and is rarely needed for beginners.</li>
+				</ul>
+			</div>
+			<div class="step">
+				<h4>7. Tips for Effective Searching</h4>
+				<ul>
+					<li><strong>Use Synonyms:</strong> Archetype names may differ from your search term. Try related
+						words or broader/narrower terms.</li>
+					<li><strong>Read Descriptions:</strong> Always check the “purpose” and “use” sections of archetypes.
+					</li>
+					<li><strong>Check Examples:</strong> Look for example usages in CKM or community forums.</li>
+					<li><strong>Ask for Help:</strong> If stuck, reach out to the openEHR Discourse or CKM forums.</li>
+				</ul>
+			</div>
+			<div class="step">
+				<h4>8. (Optional) Learn About Querying: AQL</h4>
+				<p>
+					<strong>AQL (Archetype Query Language)</strong> lets you search and retrieve data from openEHR
+					repositories using archetype structures.
+					Beginners do not need to master this immediately, but knowing it exists is helpful for future data
+					retrieval.
+					<br>
+					<a href="https://specifications.openehr.org/releases/QUERY/latest/AQL.html" target="_blank">openEHR
+						AQL Specifications</a>
+				</p>
+			</div>
+
+			<div class="extra">
+				<h4>Extra Beginner Tips</h4>
+				<ul>
+					<li>Do not worry if you do not know everything—searching and checking is part of the process.</li>
+					<li>Take notes and keep track of archetypes you consider.</li>
+					<li>Use available tools (Archetype Companion, CKM, Archetype Designer, etc.) to browse and compare
+						archetypes.</li>
+					<li>Remember: The structure of your data model does not have to match the user interface or a paper
+						form.</li>
+				</ul>
+			</div>
+			<div>
+				For more information, visit the <a href="https://openehr.org/" target="_blank">openEHR website</a> or
+				the <a href="https://ckm.openehr.org/" target="_blank">Clinical Knowledge Manager (CKM)</a>.
+			</div>
+
+			<h3>Archetype information</h3>
+
+			<p>
+				<strong>Disclaimer:</strong>
+				The information about openEHR archetypes presented in this tool has been extracted automatically from external sources (such as CKM) and is provided for convenience only. We do not guarantee the accuracy, completeness, or correctness of the extracted data, nor do we claim that it is up to date. This tool does not assert or imply any copyright ownership over the archetypes themselves. For authoritative information regarding authorship, copyright, and licensing, users are strongly advised to consult the original archetype source as stated within the tool.
+			</p>
+
+			<p>
+				The Archetype Information view displays all data extracted from the archetypes found in the source repository.			
+			</p>
+			
+			<div style="text-align: center;">
+				<img src="images/tut_arc_information_view.png" width="700">
+				<br>
+				<small>
+					The archetype information view.
+				</small>
+			</div>
+
+			<p>	
+			This includes:
+				<ul>
+				  <li>Archetype name</li>
+				  <li>Archetype ID</li>
+				  <li>A warning if the archetype is not published</li>
+				  <li>Purpose</li>
+				  <li>Description</li>
+				  <li>State</li>
+				  <li>Date of authorship</li>
+				  <li>Keywords</li>
+				  <li>Parent archetype</li>
+				  <li>Child archetypes</li>
+				  <li>Use</li>
+				  <li>Misuse</li>
+				  <li>Data elements by at-code</li>
+				  <li>Inclusion statements</li>
+				  <li>Exclusion statements</li>
+				  <li>Recommended archetypes</li>
+				</ul>
+			  </p>
+			  <p>
+				As a special feature, you can view a collapsible representation of the archetype structure. Use the "Expand All" or "Collapse All" buttons to show or hide the entire structure at once. To expand or collapse individual elements, simply click on the desired element.
+			  </p>
+
+			<div style="text-align: center;">
+				<img src="images/tut_arc_info_structure.png" width="400">
+				<br>
+				<small>
+					The collapsible archetype structure view.
+				</small>
+			</div>
+			
+
+
+			<h3>History</h3>
+			<p>
+				<strong>What is it?</strong> When navigating through archetypes, it is easy to lose track of those you
+				have visited. The history view allows you to browse through previously visited archetypes.
+			</p>
+			<p>
+				<strong>How to Access:</strong> The "History" can be accessed via the "Visited archetype history" button
+				in the upper right-hand corner of the standard view.
+			</p>
+			<div style="text-align: center;">
+				<img src="images/tut_arc_open_history.png" width="400">
+				<br>
+				<small>
+					Access the history window via the button in the main view.
+				</small>
+			</div>
+			<p>
+				<strong>Browse History:</strong> In the "History" window, there is a list of all visited archetypes. You
+				can scroll through the list and select an archetype to focus on it.
+			</p>
+			<div style="text-align: center;">
+				<img src="images/tut_arc_browse_history.png" width="350">
+				<br>
+				<small>
+					Browse the list of visited archetypes.
+				</small>
+			</div>
+			<p>
+				<strong>Go Back One Step:</strong> You can go back step by step using the "Back" button. Note that when
+				going back, the last entry in the history is deleted.
+			</p>
+			<div style="text-align: center;">
+				<img src="images/tut_arc_back_history.png" width="350">
+				<br>
+				<small>
+					Go back one step in the archetype history.
+				</small>
+			</div>
+			<p>
+				<strong>Delete History:</strong> You can delete all history entries by using the "Clear History" button.
+			</p>
+			<div style="text-align: center;">
+				<img src="images/tut_arc_delete_history.png" width="350">
+				<br>
+				<small>
+					Delete the list of visited archetypes.
+				</small>
+			</div>
+
+			<h2>Managing a Collection</h2>
+
+			<p>
+				<strong>What it is</strong> –
+				The archetype collection is a group of archetypes that you wish to keep together for reference or
+				(re)use in your project.<br>
+				A collection contains both "existing" archetypes from the archetype database and basic "new" archetypes
+				that you can define yourself.
+			</p>
+			<p>
+				<strong>Where to find it</strong> –
+				The collection is composed of existing archetypes that have been marked as collection items and all new
+				archetype prototypes.<br>
+				The existing archetypes can be found in the archetype list, marked with a star.<br>
+				The new archetypes are located on the lower left-hand side of the main view interface.
+			</p>
+			<div style="text-align: center;">
+				<img src="images/tut_col_position.png" width="900">
+				<br>
+				<small>
+					Default position of the "collection" list.
+				</small>
+			</div>
+			<h3>Add an Existing Archetype</h3>
+			<p>Add archetypes from the "existing archetypes" list to your collection.</p>
+			<p>Select the desired archetype in the "existing archetypes" list by clicking on it. An icon will appear on
+				the right-hand side of the list. Click the "Add to collection" icon, and the archetype will be marked as
+				part of the "collection" list.</p>
+			<div style="text-align: center;">
+				<img src="images/tut_col_add_existing.png" width="250">
+				<br>
+				<small>
+					Add an "existing" archetype to the collection list.
+				</small>
+			</div>
+			<p><strong>Note:</strong> Apart from being part of the collection, the archetype is now available in the
+				dropdown menus of the checklist editor.</p>
+
+			<h3>Remove Existing Archetype</h3>
+			<p>If you no longer wish to keep an "existing" archetype in your collection, you can move it back to the
+				"existing archetypes" list. Click on the archetype in the collection list to select it. An icon will
+				appear on the right of the collection list.</p>
+			<div style="text-align: center;">
+				<img src="images/tut_col_remove.png" width="240">
+				<br>
+				<small>
+					Remove an "existing" archetype from the collection list.
+				</small>
+			</div>
+			<p>Click the "Remove archetype from collection" icon. The collection tag is removed from the archetype.</p>
+
+			<h3>Hide or Show Collection Archetypes</h3>
+			<p>Sometimes the accumulation of collection archetypes at the top of the existing archetype list makes the
+				list difficult to use.</p>
+			<p>
+				You can hide or show the collection archetypes by clicking on the hide or show icon.
+			</p>
+			<div style="text-align: center;">
+				<img src="images/tut_col_hide_show.png" width="600">
+				<br>
+				<small>
+					Hide or show collection archetypes from the existing archetype list.
+				</small>
+			</div>
+
+			<h3>Create a "New" Archetype</h3>
+			<p>If you need to plan a new archetype for your project, you can create a basic placeholder here. On the
+				right side of the new archetype list, you will find the "Add new archetype" icon. Click on it to create
+				a new archetype.</p>
+			<div style="text-align: center;">
+				<img src="images/tut_col_new.png" width="240">
+				<br>
+				<small>
+					Create a "new" archetype for the collection list.
+				</small>
+			</div>
+			<p>The new archetype will be selected automatically. As shown in the information view, the archetype has no
+				information associated with it.</p>
+
+			<h3>Edit a "New" Archetype</h3>
+			<p>Select the "new" archetype you wish to edit in your new archetype list. Note that the archetype data will
+				be loaded into the archetype info window. There is also an edit icon. Click the edit icon to open the
+				editor window.</p>
+			<div style="text-align: center;">
+				<img src="images/tut_col_new_edit.png" width="600">
+				<br>
+				<small>
+					Edit option in the archetype info window, if a "new" archetype is selected.
+				</small>
+			</div>
+			<p>Here, you can edit the concept name and the archetype ID. New archetypes are identified in the system by
+				a unique UUID assigned during creation.</p>
+			<div style="text-align: center;">
+				<img src="images/tut_col_new_id.png" width="350">
+				<br>
+				<small>
+					Create an identity for the new archetype.
+				</small>
+			</div>
+			<p>You may also select a class for this archetype.</p>
+			<div style="text-align: center;">
+				<img src="images/tut_col_class_select.png" width="350">
+				<br>
+				<small>
+					Select a class for the new archetype.
+				</small>
+			</div>
+			<p>To finish, you can add a purpose and keywords to the new archetype.</p>
+			<div style="text-align: center;">
+				<img src="images/tut_col_purpose.png" width="350">
+				<br>
+				<small>
+					Adding more detail to the "new" archetype.
+				</small>
+			</div>
+			<p>Please note that this "new archetype" does not constitute a "real" openEHR archetype. It is simply a tool
+				to indicate the need for a new archetype in the repository.</p>
+
+			<h4>Include Archetype</h4>
+			<p>If you plan to have a Cluster in the "new" archetype that is defined to include another existing
+				archetype, you can add a list of inclusion statements. To do so, select the archetype you wish to
+				include from the dropdown list. The selectable archetypes are provided in the selection list.</p>
+			<div style="text-align: center;">
+				<img src="images/tut_col_include.png" width="350">
+				<br>
+				<small>
+					Select an archetype to include from the dropdown list.
+				</small>
+			</div>
+			<p>After selecting the archetype from the dropdown list, press the "Add" button. This will add the archetype
+				to the list.</p>
+			<div style="text-align: center;">
+				<img src="images/tut_col_add_inclusion.png" width="400">
+				<br>
+				<small>
+					Add the inclusion to the "new" archetype.
+				</small>
+			</div>
+			<p>If you wish to delete an inclusion statement, select the archetype you want to remove from the dropdown
+				menu and press the "Remove" button.</p>
+			<div style="text-align: center;">
+				<img src="images/tut_col_delete_inclusion.png" width="400">
+				<br>
+				<small>
+					Delete the inclusion from the list of the "new" archetype.
+				</small>
+			</div>
+			<h3>Delete a "New" Archetype</h3>
+			<p>If you no longer wish to keep the "new" archetype in your collection, you can delete it from the list.
+				Click on the archetype in the new archetype list to select it. An icon will appear on the right of the
+				new archetype list.</p>
+			<div style="text-align: center;">
+				<img src="images/tut_col_delete_new.png" width="240">
+				<br>
+				<small>
+					Delete the "new" archetype from the collection list.
+				</small>
+			</div>
+			<p>Click the "Delete new archetype" icon. The archetype will be deleted permanently and will disappear from
+				the new archetype list.</p>
+
+			<h2>Managing Checklists</h2>
+
+			<p>When exploring archetypes, you may need to find specific data elements that match a list you have
+				prepared in advance. We refer to this structured list of data elements as a "checklist". Checklists help
+				you track required data elements and ensure nothing is missed during modelling.</p>
+
+			<h3>Where to find the checklist</h3>
+			<p>You can see the checklist on the right-hand side of the main view. When creating a new project, this view
+				is empty. To create or edit the checklist, click the "Edit" button in the checklist view. You can also
+				open the editor via the Checklist Editor View at the top of the interface.</p>
+			<div style="text-align: center;">
+				<img src="images/tut_che_open.png" width="450">
+				<br>
+				<small>
+					Access the checklist editor via the checklist or standard view.
+				</small>
+			</div>
+			<p>The checklist is structured in sections and elements, allowing you to group data elements into sections
+				for a basic structure.</p>
+
+			<h3>Creating a Checklist in the Editor</h3>
+			<p>
+				<strong>Add a Section:</strong> To add elements, you must first create a section by clicking the “Add
+				Section” button.
+			</p>
+			<div style="text-align: center;">
+				<img src="images/tut_che_add_section.png" width="600">
+				<br>
+				<small>
+					Add a section to the checklist.
+				</small>
+			</div>
+			<p>You can rename the section by clicking its name and typing a new one. Please ensure each section has a
+				unique name.</p>
+			<div style="text-align: center;">
+				<img src="images/tut_che_rename_section.png" width="600">
+				<br>
+				<small>
+					Rename the section with the corresponding input field.
+				</small>
+			</div>
+			<p>
+				<strong>Add Elements to a Section:</strong> Within a section, add individual data elements as needed by
+				clicking the "Add element" button below the section name.
+			</p>
+			<div style="text-align: center;">
+				<img src="images/tut_che_add_element.png" width="600">
+				<br>
+				<small>
+					Add an element to a section of the checklist.
+				</small>
+			</div>
+			<p>Each new element is automatically named, but you can change this by clicking on the name and typing a new
+				one. Ensure element names are unique within each section.</p>
+			<div style="text-align: center;">
+				<img src="images/tut_che_rename_element.png" width="600">
+				<br>
+				<small>
+					Rename the element with the corresponding input field.
+				</small>
+			</div>
+
+			<p>
+				<strong>Add element description:</strong> Under any element you can add a description in the text field.
+				This description helps to better define the element.
+			</p>
+
+			<div style="text-align: center;">
+				<img src="images/tut_che_element_description.png" width="600">
+				<br>
+				<small>
+					Add a description to an element.
+				</small>
+			</div>
+
+			
+
+			<p>
+				<strong>Collapsing/Expanding Branches</strong>: Working on the checklist can be challenging. To help you focus on the section you are working on, you can collapse or expand sections as needed. Use the "Collapse All" button at the top to close all sections, or the "Expand All" button to open them.  
+				Each section also has a button on its right, labeled "Collapse" or "Expand", depending on its current state. Clicking this button will collapse or expand that specific section.
+			  </p>
+
+			  <div style="text-align: center;">
+				<img src="images/tut_che_collapse_list.png" width="600">
+				<br>
+				<small>
+					Collapsing the checklist items in the editor.
+				</small>
+			</div>
+
+
+			<p>
+				<strong>Move Sections or Elements:</strong> If a section or element is not in the desired position, use
+				the arrow icons in front of the name to move it up or down.
+			</p>
+			<div style="text-align: center;">
+				<img src="images/tut_che_move_items.png" width="600">
+				<br>
+				<small>
+					Use the up and down arrow to move whole sections or single elements.
+				</small>
+			</div>
+			<p>
+				<strong>Delete Elements or Sections:</strong> To remove an item, click the "Delete" button next to it.
+				Deleting a section will also delete all elements within that section.
+			</p>
+			<div style="text-align: center;">
+				<img src="images/tut_che_delete_items.png" width="600">
+				<br>
+				<small>
+					Delete whole sections or single elements.
+				</small>
+			</div>
+			<h3>Assigning Archetypes to Data Elements</h3>
+			<p>If archetypes are available in the collection, you can assign any element to an archetype, indicating
+				that the archetype contains an item equivalent to your data element. Use the dropdown list next to the
+				element name to select the archetype. If an archetype is removed from the collection, any assignments to
+				it will be reset.</p>
+			<div style="text-align: center;">
+				<img src="images/tut_che_assign_archetype.png" width="600">
+				<br>
+				<small>
+					Use the dropdown menu to assign an archetype from the collection to an element.
+				</small>
+			</div>
+
+			<h3>Flagging Data Elements</h3>
+			<p>Each element in the checklist editor has two checkboxes. Use the left checkbox to indicate that an
+				element is complete. Use the right checkbox to mark elements that need further review.</p>
+			<div style="text-align: center;">
+				<img src="images/tut_che_flag.png" width="600">
+				<br>
+				<small>
+					Flag elements as approved and/or pending review.
+				</small>
+			</div>
+
+			<h3>Save Checklist to Excel</h3>
+			<p>You can export your checklist as an Excel file for offline editing or sharing. After entering the editor
+				mode, click the "Save Checklist to Excel" button. The file is saved automatically to your browser's
+				download directory. The filename includes the time, date, and project name (which may be modified for
+				compatibility).</p>
+			<div style="text-align: center;">
+				<img src="images/tut_che_save_file.png" width="150">
+				<br>
+				<small>
+					Save checklist to an Excel file.
+				</small>
+			</div>
+
+			<h3>Open Checklist from Excel File</h3>
+			<p>If you prefer editing the checklist in Excel or have a checklist saved in Excel format, you can import
+				it. In the checklist editor, click "Load checklist from Excel". Use the standard file dialogue to select
+				and open your Excel file, which will load its content into the checklist editor.</p>
+			<div style="text-align: center;">
+				<img src="images/tut_che_open_file.png" width="150">
+				<br>
+				<small>
+					Load a checklist from an Excel file.
+				</small>
+			</div>
+
+			<h3>Delete a Checklist from Project</h3>
+			<p>To delete the entire checklist, use the "Delete Checklist" button in the checklist editor.</p>
+			<div style="text-align: center;">
+				<img src="images/tut_che_delete_checklist.png" width="150">
+				<br>
+				<small>
+					Delete the checklist.
+				</small>
+			</div>
+
+			<h2>Managing a Template-like Structure (Template Planner)</h2>
+			<p>
+				The Archetype Companion includes a module that allows you to plan a tree structure, similar to an
+				openEHR template. Please note that this tool does not create actual openEHR templates; instead, it
+				serves as a support tool for designing structures before you begin modelling in a dedicated openEHR
+				modelling tool.
+			</p>
+
+			<p>
+				When opened, the Template Planner appears on the left-hand side of the interface.
+			</p>
+			<div style="text-align: center;">
+				<img src="images/tut_tree_editor.png" width="800">
+				<br>
+				<small>
+					The open Template Planner.
+				</small>
+			</div>
+
+			<h3>Where to Find the Template Planner Editor</h3>
+			<p>
+				There are several ways to open the Template Planner. To access the standard Template Planner edit view,
+				click the icon located in the upper right-hand corner of the interface. Alternatively, you can open the
+				Template Planner in a floating window by clicking the tree icon in either the checklist view or the
+				checklist editor, or by using the button in the sidebar.
+			</p>
+			<div style="text-align: center;">
+				<img src="images/tut_tree_access.png" width="900">
+				<br>
+				<small>
+					Access the Template Planner via the tree icon.
+				</small>
+			</div>
+
+			<h3>Selecting an Archetype</h3>
+			<p>
+				When you first open the Template Planner editor, only a single node of the tree is displayed. This node
+				must be an archetype that serves as the root of the "template" (typically a COMPOSITION archetype). You
+				can select one of the archetypes from the dropdown menu; note that only archetypes from your collection
+				will appear here. Once selected, the default concept name of the archetype is inserted as the name. You
+				can change this name if you wish.
+			</p>
+			<div style="text-align: center;">
+				<img src="images/tut_tree_select_archetype.png" width="600">
+				<br>
+				<small>
+					Select an archetype from your collection as a node of the tree.
+				</small>
+			</div>
+
+			<h3>Adding a Branch</h3>
+			<p>
+				Each archetype node in the tree can have subsequent archetype or element nodes associated with it. For
+				example, a SECTION archetype can include an OBSERVATION archetype, which in turn contains a data
+				element. Note that an element cannot contain other elements or archetypes.<br><br>
+				To create a branch under an archetype node, click the "+" icon to the right of the node. This will
+				create a new archetype node.
+			</p>
+			<div style="text-align: center;">
+				<img src="images/tut_tree_add_branch.png" width="600">
+				<br>
+				<small>
+					Adding a branch node to the tree.
+				</small>
+			</div>
+
+			<h3>Cloning a Branch</h3>
+			<p>
+				If you need to model structures with similar sub-structures, you can easily duplicate an entire branch—including its archetype and element hierarchy—by clicking the "Clone branch" button on the relevant archetype node.
+			  </p>
+			<div style="text-align: center;">
+				<img src="images/tut_tree_clone_branch.png" width="550">
+				<br>
+				<small>
+					Cloning a branch node of the tree.
+				</small>
+			</div>
+
+			<h3>Deleting a Node or a Branch</h3>
+			<p>
+				To delete a node from the tree, click the "-" icon to the right of the node. This will remove the node,
+				along with any underlying nodes associated with it.
+			</p>
+			<div style="text-align: center;">
+				<img src="images/tut_tree_delete_node.png" width="600">
+				<br>
+				<small>
+					Deleting a node from the tree.
+				</small>
+			</div>
+
+			<h3>Collapsing/Expanding Branches</h3>
+
+			<p>
+				Navigating complex tree-like structures can be challenging, and it’s easy to lose track of the overall layout. To help you manage these structures more efficiently, you can collapse or expand branches as needed. Use the "Collapse All" button at the top to close all branches, or the "Expand All" button to open them.  
+				Each archetype node with sub-branches also has a button on its right, labeled "C" (for collapse) or "E" (for expand), depending on its current state. Clicking this button will collapse or expand that specific branch.
+			  </p>
+
+			  <div style="text-align: center;">
+				<img src="images/tut_tree_collapse_branch.png" width="600">
+				<br>
+				<small>
+					Collapsing a node from the tree.
+				</small>
+			</div>
+
+			
+
+			<h3>Moving Nodes and Branches Around</h3>
+			<p>
+				If the order of the nodes or branches needs to be changed in the planned structure, the individual nodes
+				can be moved.<br>
+				Every node has an up and down arrow on the right side. By clicking on these buttons, the individual node
+				is moved up or down.
+			</p>
+			<div style="text-align: center;">
+				<img src="images/tut_tree_move_nodes.png" width="600">
+				<br>
+				<small>
+					Move a node up or down.
+				</small>
+			</div>
+
+			<p>
+				Whole branches and elements can be moved via drag and drop. Click and hold on the double-arrow on the
+				left side of the node. You can now drag the node into another node.
+			</p>
+			<div style="text-align: center;">
+				<img src="images/tut_tree_node_drag.png" width="600">
+				<br>
+				<small>
+					Drag and drop a node or branch.
+				</small>
+			</div>
+
+			<h3>Switching Between Archetype and Data Element</h3>
+			<p>
+				A node in this tree can represent either an archetype or a data element.<br><br>
+				Once a node is created, you can switch between the two modes by clicking the "A" (or "E") icon to the
+				left of the node.<br><br>
+				Please note that changing modes will delete the information associated with the node (such as the name
+				or archetype ID). Additionally, if you change an archetype node that has sub-nodes, all sub-nodes will
+				also be deleted.
+			</p>
+			<div style="text-align: center;">
+				<img src="images/tut_tree_switch_node_modes.png" width="600">
+				<br>
+				<small>
+					Switching between "archetype" and "data element" node modes.
+				</small>
+			</div>
+
+			<h4>Archetype Nodes</h4>
+			<p>
+				In contrast to element nodes, an archetype node has a selection dropdown menu to select the archetype
+				from the "archetype collection".
+			</p>
+			<p>
+				One special item in an archetype node is the ability to "focus" on this node. If an archetype is
+				selected from the collection, you can click on the focus icon. This will select the archetype and load
+				its information in the archetype information window and the visualisation window.
+			</p>
+			<div style="text-align: center;">
+				<img src="images/tut_tree_focus_on_node.png" width="800">
+				<br>
+				<small>
+					The focus on node icon.
+				</small>
+			</div>
+
+			<h4>Data Element Nodes</h4>
+			<p>
+				Data element nodes come in two forms. If an archetype has data elements assigned in the checklist, the
+				data element node in the tree that has been added under this archetype becomes a selection. You can
+				select one of the assigned data elements or enter another data element name. Note that the data element
+				names consist of the section and the element name of the checklist.
+			</p>
+			<div style="text-align: center;">
+				<img src="images/tut_tree_assigned_element_selection.png" width="800">
+				<br>
+				<small>
+					If an archetype has data elements assigned in the checklist, the data element node in the tree is a
+					selection.
+				</small>
+			</div>
+
+			<p>
+				If an archetype has no data element assigned in the checklist, the data element node in the tree is an
+				input field for the name.
+			</p>
+			<div style="text-align: center;">
+				<img src="images/tut_tree_element_without_assigned_archetype.png" width="600">
+				<br>
+				<small>
+					If an archetype has no data element assigned in the checklist, the data element node in the tree is
+					an input field for the name.
+				</small>
+			</div>
+
+			<h3>Commenting Nodes</h3>
+			<p>
+				Every node in the tree can have a comment. To open the comment text field, you can click on the speech
+				bubble on the right of the node.
+			</p>
+			<div style="text-align: center;">
+				<img src="images/tut_tree_toggle_comment.png" width="600">
+				<br>
+				<small>
+					Toggle the comment text field for a node.
+				</small>
+			</div>
+
+			<p>
+				This opens a text field in which you can store a comment. You can collapse the text field by clicking
+				again on the speech bubble.
+			</p>
+			<div style="text-align: center;">
+				<img src="images/tut_tree_node_comment.png" width="600">
+				<br>
+				<small>
+					Enter a comment into the text field.
+				</small>
+			</div>
+
+			<p>Note that in the presence of a comment, the speech bubble turns blue. If the comment text fields are
+				collapsed, it is easy to see where comments exist.</p>
+			<div style="text-align: center;">
+				<img src="images/tut_tree_blue_bubble.png" width="600">
+				<br>
+				<small>
+					Blue speech bubbles indicate the presence of a comment.
+				</small>
+			</div>
+
+			<h3>Assigning "atcode" Item to Archetype or Element</h3>
+			<p>
+				If a node is added to an archetype node that has been selected from the archetype collection, you can
+				select the atcode of the archetype that you would like to add the new node to. You can select the code
+				from the dropdown menu. The assignment of the code will be visible in the project report.
+			</p>
+			<div style="text-align: center;">
+				<img src="images/tut_tree_assign_atcode.png" width="600">
+				<br>
+				<small>
+					Assign atcode of the parent archetype to the node.
+				</small>
+			</div>
+
+			<h3>Compatibility Warnings</h3>
+			<p>
+				As a support for the openEHR template modelling process, the Template Planner offers a compatibility
+				warning for the different archetype classes. In the openEHR framework, not every class can be
+				incorporated into any other class. A possible compatibility issue is indicated by a yellow warning sign
+				to the left of the archetype node.<br><br>
+				Note that this is only a reminder to check the compatibility between different archetypes. A warning can
+				be shown, even if the archetypes are compatible.
+			</p>
+			<div style="text-align: center;">
+				<img src="images/tut_tree_compatibility_warning.png" width="600">
+				<br>
+				<small>
+					Compatibility warning for an archetype class that has been included (possibly) incorrectly into
+					another archetype class.
+				</small>
+			</div>
+
+			<p>
+				The compatibility between archetype classes can be visualised as puzzle pieces:
+			</p>
+
+			<div style="text-align: center;">
+				<img src="images/tut_class_compatibility.png" width="800">
+				<br>
+				<small>
+					Compatibility between archetype classes.
+				</small>
+			</div>
+
+			<p>Translating the previous figure into a table, we can easily check if a class is compatible or not.</p>
+			<div class="snazzy-table-container">
+				<table class="snazzy-table">
+					<thead>
+						<tr>
+							<th>Class</th>
+							<th>Can be added to</th>
+							<th>Can contain</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr>
+							<td>COMPOSITION</td>
+							<td>---</td>
+							<td>CLUSTER (if slot added to context/other_context)<br>
+								SECTION<br>
+								ENTRY
+							</td>
+						</tr>
+						<tr>
+							<td>SECTION</td>
+							<td>COMPOSITION<br>
+								SECTION
+							</td>
+							<td>
+								ENTRY<br>
+								SECTION
+							</td>
+						</tr>
+						<tr>
+							<td>CLUSTER</td>
+							<td>COMPOSITION (if slot provided)<br>
+								CLUSTER (if slot provided)<br>
+								ENTRY (if slot provided)<br>
+							</td>
+							<td>CLUSTER (if slot provided)</td>
+						</tr>
+						<tr>
+							<td>ENTRY<br>
+								<small>(ADMIN_ENTRY,<br>
+									ACTION,<br>
+									EVALUATION,<br>
+									INSTRUCTION,<br>
+									OBSERVATION)</small>
+							</td>
+							<td>COMPOSITION<br>
+								SECTION</td>
+							<td>CLUSTER (if slot provided)</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+
+
+			<h3>Delete All Template Planner Data</h3>
+			<p>
+				To delete all data from the Template Planner, click the "Delete" icon in the lower right-hand corner of
+				the window.
+			</p>
+			<div style="text-align: center;">
+				<img src="images/tut_tree_delete_all.png" width="600">
+				<br>
+				<small>
+					Delete everything in the tree.
+				</small>
+			</div>
+
+			<h3>Template Planner and Visualisation</h3>
+			<p>If you want to see a simple representation of the Template Planner content, you can select "Template
+				Planner" in the visualisation window. The nodes of this visualisation show the archetypes (blue) and
+				assigned elements (green). This view can help you to navigate the planned structure more easily, without
+				the extended information of the Template Planner.</p>
+			<div style="text-align: center;">
+				<img src="images/tut_tree_visualisation.png" width="950">
+				<br>
+				<small>
+					Network visualisation of the planned tree structure.
+				</small>
+			</div>
+
+			<h3>Template Planner Data in the Report</h3>
+			<p>When creating the report for the project, the data from the Template Planner is used to create a list
+				with all elements that were defined. An example of this list, as found in the report, can be seen here:
+			</p>
+
+			<!-- The example list is unchanged for clarity and accuracy -->
+
+			<ul style="list-style-type: none; font-family: Arial, sans-serif;font-size: 12pt;">
+				<li style="margin-bottom: 3px; padding: 8px; border-left: 2px solid #ccc;">
+					<strong style="color:blue;">Encounter</strong><br>
+					<span style="color: #888;">openEHR-EHR-COMPOSITION.encounter.v1</span><br>
+					<em>Type:</em> COMPOSITION<br>
+					<em><small>archetype</small></em><br>
+					<em><small style="color:blue;">I think that this is the best archetype for the job.</small></em>
+					<ul style="margin-left: 20px; border-left: 1px dashed #ddd; padding-left: 12px;">
+						<li style="margin-bottom: 3px; padding: 8px; border-left: 2px solid #ccc;">
+							<strong style="color:blue;">Care Episode</strong><em><small> -- [at0002] Extension
+									CLUSTER</small></em><br>
+							<span style="color: #888;">care_episode</span><br>
+							<em>Type:</em> CLUSTER<br>
+							<em><small>archetype</small></em><br>
+							<em><small style="color:blue;">This is a specific archetype for our DEMO institution. It
+									helps us to track the care episode.</small></em>
+							<ul style="margin-left: 20px; border-left: 1px dashed #ddd; padding-left: 12px;">
+								<li style="margin-bottom: 3px; padding: 8px; border-left: 2px solid #ccc;">
+									<strong style="color:darkgreen;">Episode of care - Process ID</strong><br>
+									<em><small>element</small></em>
+								</li>
+							</ul>
+						</li>
+						<li style="margin-bottom: 3px; padding: 8px; border-left: 2px solid #ccc;">
+							<strong style="color:blue;">Vital Signs</strong><em><small> -- Reference
+									Model</small></em><br>
+							<span style="color: #888;">openEHR-EHR-SECTION.adhoc.v1</span><br>
+							<em>Type:</em> SECTION<br>
+							<em><small>archetype</small></em>
+							<ul style="margin-left: 20px; border-left: 1px dashed #ddd; padding-left: 12px;">
+								<li style="margin-bottom: 3px; padding: 8px; border-left: 2px solid #ccc;">
+									<strong style="color:blue;">Pulse/Heart beat</strong><em><small> -- Reference
+											Model</small></em><br>
+									<span style="color: #888;">openEHR-EHR-OBSERVATION.pulse.v2</span><br>
+									<em>Type:</em> OBSERVATION<br>
+									<em><small>archetype</small></em>
+									<ul style="margin-left: 20px; border-left: 1px dashed #ddd; padding-left: 12px;">
+										<li style="margin-bottom: 3px; padding: 8px; border-left: 2px solid #ccc;">
+											<strong style="color:darkgreen;">Vital signs - Heart
+												rate</strong><em><small> -- [at0004] Rate
+													['DV_ORDINAL']</small></em><br>
+											<em><small>element</small></em>
+										</li>
+									</ul>
+								</li>
+								<li style="margin-bottom: 3px; padding: 8px; border-left: 2px solid #ccc;">
+									<strong style="color:blue;">Height/Length</strong><em><small> -- Reference
+											Model</small></em><br>
+									<span style="color: #888;">openEHR-EHR-OBSERVATION.height.v2</span><br>
+									<em>Type:</em> OBSERVATION<br>
+									<em><small>archetype</small></em>
+									<ul style="margin-left: 20px; border-left: 1px dashed #ddd; padding-left: 12px;">
+										<li style="margin-bottom: 3px; padding: 8px; border-left: 2px solid #ccc;">
+											<strong style="color:darkgreen;">Vital signs - Height</strong><em><small> --
+													[at0004] Height/Length ['DV_ORDINAL']</small></em><br>
+											<em><small>element</small></em>
+										</li>
+									</ul>
+								</li>
+								<li style="margin-bottom: 3px; padding: 8px; border-left: 2px solid #ccc;">
+									<strong style="color:blue;">Body weight</strong><em><small> -- Reference
+											Model</small></em><br>
+									<span style="color: #888;">openEHR-EHR-OBSERVATION.body_weight.v2</span><br>
+									<em>Type:</em> OBSERVATION<br>
+									<em><small>archetype</small></em>
+									<ul style="margin-left: 20px; border-left: 1px dashed #ddd; padding-left: 12px;">
+										<li style="margin-bottom: 3px; padding: 8px; border-left: 2px solid #ccc;">
+											<strong style="color:darkgreen;">Vital signs - Weight</strong><em><small> --
+													[at0004] Weight ['DV_ORDINAL']</small></em><br>
+											<em><small>element</small></em>
+										</li>
+									</ul>
+								</li>
+							</ul>
+						</li>
+						<!-- ...rest of the example list unchanged... -->
+					</ul>
+				</li>
+			</ul>
+
+			<h2>Visualisation</h2>
+
+			<p>The network visualisation feature of the application provides an intuitive way to see relationships
+				between archetypes. Different visualisation modes allow you to display archetype dependencies,
+				similarities, your archetype collection, the overall project structure, and the template planner tree.
+			</p>
+
+			<h3>Where to Find the Visualisation Window</h3>
+			<p>In the standard main view, the visualisation feature is located in the centre section of the screen.
+				Before exploring the different views, it is helpful to understand how to navigate the visualisation
+				canvas.</p>
+			<div style="text-align: center;">
+				<img src="images/tut_vis_position.png" width="900">
+				<br>
+				<small>
+					Where to find the visualisation.
+				</small>
+			</div>
+
+			<h3>Navigating the Visualisation</h3>
+			<p>
+				<strong>Move:</strong> To move the network visualisation canvas, click and hold the left mouse button on
+				an empty space and drag the network around.
+			</p>
+			<p>
+				<strong>Zoom:</strong> To zoom in or out, use your mouse wheel while the cursor is over the canvas.
+				Alternatively, you can use pinch gestures on a trackpad.
+			</p>
+			<p>
+				<strong>Reset Zoom:</strong> To reset the position and zoom, click the "Reset Zoom" icon in the lower
+				right-hand corner of the visualisation.
+			</p>
+			<div style="text-align: center;">
+				<img src="images/tut_vis_reset_zoom.png" width="350">
+				<br>
+				<small>
+					Reset zoom button.
+				</small>
+			</div>
+			<p>
+				<strong>Focus on Archetype:</strong> To focus on a specific archetype in the network, click on its node
+				with the left mouse button.
+			</p>
+			<h3>The Different Views</h3>
+
+			<p>The network visualisation has various views that can be selected with the dropdown menu on the upper
+				right side of the window. You can select between <em>Archetype</em>, <em>Similar</em>, <em>Archetype +
+					Similar</em>, <em>Collection</em>, <em>Project</em>, and <em>Template Planner</em> view.</p>
+
+			<div style="text-align: center;">
+				<img src="images/tut_vis_selection.png" width="150">
+				<br>
+				<small>
+					The view selection.
+				</small>
+			</div>
+
+			<p>
+				<strong>Archetype:</strong>
+			</p>
+			<ul>
+				<li>In the "Archetype" view, you can see the relationships of an archetype with others.</li>
+				<li>The currently selected archetype is shown as a red node.</li>
+				<li>Parent-child relationships are indicated by solid black lines, with arrows pointing from parent to
+					child.</li>
+				<li>Inclusion and exclusion relationships are shown as green and red dashed lines, respectively.</li>
+				<li>This is the default view when opening the application.</li>
+			</ul>
+			<div style="text-align: center;">
+				<img src="images/tut_vis_archetype_view.png" width="600">
+				<br>
+				<small>
+					The archetype view.
+				</small>
+			</div>
+			<p>
+				<strong>Similar:</strong>
+			</p>
+			<ul>
+				<li>The "Similar" view displays recommended archetypes that may be related or similar to the current
+					one.</li>
+				<li>These are shown without connecting lines.</li>
+			</ul>
+			<div style="text-align: center;">
+				<img src="images/tut_vis_similar_view.png" width="600">
+				<br>
+				<small>
+					The similar archetypes view.
+				</small>
+			</div>
+			<p>
+				<strong>Archetype + Similar:</strong>
+			</p>
+			<ul>
+				<li>This view combines the "Archetype" and "Similar" views, showing both relationships and
+					recommendations.</li>
+			</ul>
+			<div style="text-align: center;">
+				<img src="images/tut_vis_combination_view.png" width="600">
+				<br>
+				<small>
+					The combined archetypes view.
+				</small>
+			</div>
+			<p>
+				<strong>Collection:</strong>
+			</p>
+			<ul>
+				<li>The "Collection" view shows relationships between archetypes in your collection list.</li>
+				<li>There is no red focused archetype.</li>
+				<li>Node colours distinguish between archetypes from the database (yellow) and new archetypes (blue).
+				</li>
+				<li>Clicking a node selects it and displays its information.</li>
+				<li>Relationships are shown with solid black lines (parent-child) and dashed red or green lines
+					(exclusions or inclusions).</li>
+			</ul>
+			<div style="text-align: center;">
+				<img src="images/tut_vis_collection_view.png" width="600">
+				<br>
+				<small>
+					The collection view.
+				</small>
+			</div>
+			<p>
+				<strong>Project:</strong>
+			</p>
+			<ul>
+				<li>The "Project" view displays the assignment of archetypes to data elements defined in your checklist.
+				</li>
+				<li>Three columns show section names (pink), data elements (green), and assigned archetypes (blue or
+					yellow).</li>
+				<li>Data elements are connected to their sections with grey dashed lines, and assigned archetypes are
+					shown in the third column, connected to data elements with grey dashed lines.</li>
+				<li>Node colours again distinguish between database and new archetypes.</li>
+				<li>This view provides an overview of all archetypes and checklists in your project, including their
+					dependencies.</li>
+			</ul>
+			<div style="text-align: center;">
+				<img src="images/tut_vis_project_view.png" width="600">
+				<br>
+				<small>
+					The project view.
+				</small>
+			</div>
+
+			<p>
+				<strong>Template Planner:</strong>
+			</p>
+			<ul>
+				<li>The "Template Planner" view displays the archetype and data element structure created with the
+					Template Planner module.</li>
+				<li>Archetypes are shown as blue nodes, data elements as green nodes.</li>
+				<li>The structure of archetypes and data elements is indicated by a grey line.</li>
+			</ul>
+			<div style="text-align: center;">
+				<img src="images/tut_vis_template_planner_view.png" width="400">
+				<br>
+				<small>
+					The Template Planner view.
+				</small>
+			</div>
+
+			<h3>Export Visualisation View</h3>
+			<p>For documentation, you can export the current visualisation as an SVG image. Click the "Save as SVG
+				image" button in the lower right-hand corner of the visualisation.</p>
+			<div style="text-align: center;">
+				<img src="images/tut_vis_export_svg.png" width="350">
+				<br>
+				<small>
+					Save to SVG file button.
+				</small>
+			</div>
+			<p>The file is saved automatically to your browser's download directory, with a filename containing the
+				time, date, project name, and view mode. The project name may be modified for compatibility.</p>
+
+			<h2>Glossary</h2>
+			<p>
+				The Archetype Companion provides a glossary of openEHR classes. The information on openEHR classes has
+				been extracted previously from the following sources:
+			</p>
+			<ul>
+				<li><a href="https://specifications.openehr.org/releases/BASE/Release-1.2.0/base_types.html">BASE Types
+						1.2.0</a></li>
+				<li><a href="https://specifications.openehr.org/releases/RM/latest/common.html">Reference Model:
+						Common</a></li>
+				<li><a href="https://specifications.openehr.org/releases/RM/latest/data_structures.html">Reference
+						Model: Data Structures</a></li>
+				<li><a href="https://specifications.openehr.org/releases/RM/latest/data_types.html">Reference Model:
+						Data Types</a></li>
+				<li><a href="https://specifications.openehr.org/releases/RM/latest/demographic.html">Reference Model:
+						Demographic</a></li>
+				<li><a href="https://specifications.openehr.org/releases/RM/latest/ehr_extract.html">Reference Model:
+						EHR Extract</a></li>
+				<li><a href="https://specifications.openehr.org/releases/RM/latest/ehr.html">Reference Model: EHR</a>
+				</li>
+				<li><a href="https://specifications.openehr.org/releases/RM/latest/integration.html">Reference Model:
+						Integration</a></li>
+				<li><a href="https://specifications.openehr.org/releases/RM/latest/support.html">Reference Model:
+						Support</a></li>
+				<li><a href="https://specifications.openehr.org/classes">openEHR Class Index</a></li>
+			</ul>
+			<p style="margin-top: 2em; font-size: 0.95em;">
+				<strong>Legal Notice:</strong><br>
+				This glossary is provided for informational purposes only. We do not claim authorship of the original
+				openEHR content, nor do we assert any copyright over it. All copyrights and intellectual property rights
+				remain with the respective owners and authors. The information is presented as is, without warranty of
+				any kind, either express or implied. Users must ensure that any use of this content complies with the
+				applicable licences and terms set by the original copyright holders. No modifications or redistribution
+				of the original material are implied or encouraged by this resource.
+			</p>
+
+			<h3>Where to Find the Glossary</h3>
+			<p>
+				The glossary can be accessed easily via the icon in the upper right-hand corner of the interface:
+			</p>
+			<div style="text-align: center;">
+				<img src="images/tut_gloss_access.png" width="500">
+				<br>
+				<small>
+					Opening the glossary with the icon.
+				</small>
+			</div>
+
+			<h3>How to Search the Glossary</h3>
+			<p>
+				In the upper left-hand corner of the window, you will find the search bar. Here you can type a search
+				term. With every keystroke, the search result list beneath is updated. Click on one of the search
+				results to see the corresponding entry.
+			</p>
+			<p>
+				By default, only the class name and description are searched. You can add attribute names, descriptions
+				and data type to the search by ticking the corresponding checkboxes.
+			</p>
+			<div style="text-align: center;">
+				<img src="images/tut_gloss_the_glossary.png" width="600">
+				<br>
+				<small>
+					The glossary.
+				</small>
+			</div>
+
+			<h3>Close the Glossary</h3>
+			<p>
+				You can close the glossary window with the "X" button in the upper right-hand corner of the window.
+			</p>
+
+			<h2>Data Storage</h2>
+			<h3>Local Storage</h3>
+
+			<p>
+				When using the visualisation tool, your project data is saved in your browser's <strong>local
+					storage</strong> under the key <code>ArchetypeExplorerProject</code>. This ensures your work is not
+				lost when you refresh or close the page*.
+			</p>
+			<p>
+				Here's how you can find, back up, or delete this data in different browsers:
+			</p>
+
+			<h4>Google Chrome</h4>
+			<ol>
+				<li>Open Developer Tools: Press <kbd>Ctrl</kbd> + <kbd>Shift</kbd> + <kbd>I</kbd> (Windows/Linux) or
+					<kbd>Cmd</kbd> + <kbd>Option</kbd> + <kbd>I</kbd> (Mac), or right-click the page and select
+					<strong>Inspect</strong>.</li>
+				<li>Go to the <strong>Application</strong> tab.</li>
+				<li>In the left sidebar, expand <strong>Local Storage</strong> and select your website's URL.</li>
+				<li>Find <code>ArchetypeExplorerProject</code> in the list. You can view, edit, or delete it by
+					right-clicking the entry.</li>
+			</ol>
+
+			<div style="text-align: center;">
+				<img src="images/local_storage.png" alt="Local storage" width="600">
+			</div>
+
+			<h4>Mozilla Firefox</h4>
+			<ol>
+				<li>Open Developer Tools: Press <kbd>F12</kbd> or <kbd>Ctrl</kbd> + <kbd>Shift</kbd> + <kbd>I</kbd>
+					(Windows/Linux) or <kbd>Cmd</kbd> + <kbd>Option</kbd> + <kbd>I</kbd> (Mac), or right-click and
+					select <strong>Inspect</strong>.</li>
+				<li>Click the <strong>Storage</strong> tab.</li>
+				<li>Expand <strong>Local Storage</strong> and select your website.</li>
+				<li>Locate <code>ArchetypeExplorerProject</code> in the list. You can view, edit, or delete it as
+					needed.</li>
+			</ol>
+
+			<h4>Microsoft Edge</h4>
+			<ol>
+				<li>Open Developer Tools: Press <kbd>F12</kbd> or <kbd>Ctrl</kbd> + <kbd>Shift</kbd> + <kbd>I</kbd>
+					(Windows/Linux) or <kbd>Cmd</kbd> + <kbd>Option</kbd> + <kbd>I</kbd> (Mac), or right-click and
+					select <strong>Inspect</strong>.</li>
+				<li>Go to the <strong>Application</strong> tab.</li>
+				<li>Expand <strong>Local Storage</strong> and select your website.</li>
+				<li>Find <code>ArchetypeExplorerProject</code> in the list. Right-click to edit or delete.</li>
+			</ol>
+
+			<h4>Safari</h4>
+			<ol>
+				<li>Enable the Develop menu: Go to <strong>Safari &gt; Preferences &gt; Advanced</strong> and check
+					<strong>Show Develop menu in menu bar</strong>.</li>
+				<li>Open Web Inspector: Press <kbd>Cmd</kbd> + <kbd>Option</kbd> + <kbd>I</kbd> or select
+					<strong>Develop &gt; Show Web Inspector</strong>.</li>
+				<li>Click the <strong>Storage</strong> tab.</li>
+				<li>Expand <strong>Local Storage</strong> and select your website.</li>
+				<li>Find <code>ArchetypeExplorerProject</code> in the list. You can view, edit, or delete it.</li>
+			</ol>
+			<p>
+				<strong>*Note:</strong> Clearing your browser's cache will remove this data.
+			</p>
+
+			<h3>Archetype Database</h3>
+
+			<p>
+				The archetype data used in the online version of the Archetype Companion has been extracted from an
+				archetype repository with the ADL Extraction Tool, developed for this project. Please refer for more
+				information to: <a
+					href="https://github.com/martinkochdesign/openEHR_fellowship_2025_project/blob/main/README.md#adl-extraction-tool"
+					target="_blank">ADL Extraction Tool</a>.
+			</p>
+
+			<p>
+				<strong>Note:</strong> The information about openEHR archetypes presented in this tool has been
+				extracted automatically from external sources (such as CKM) and is provided for convenience only. We do
+				not guarantee the accuracy, completeness, or correctness of the extracted data, nor do we claim that it
+				is up to date. This tool does not assert or imply any copyright ownership over the archetypes
+				themselves. For authoritative information regarding authorship, copyright, and licensing, users are
+				strongly advised to consult the original archetype source as stated within the tool.
+			</p>
+
+			<p>The archetype data is stored in the "allNodes" variable, found in the "data.js" file.
+				<br>
+				<strong>Note:</strong> If the database is updated and there are changes in the archetype database, the
+				database of the project is updated automatically. A detailed warning is issued in this case.
+			</p>
+
+			<div style="text-align: center;">
+				<img src="images/tut_data_management.png" width="400">
+				<br>
+				<small>
+					Update warning for the archetype database.
+				</small>
+			</div>
+
+			<h2>Running Archetype Companion Locally</h2>
+
+			<ol>
+				<li>
+					<strong>Download the Package</strong>
+					<ul>
+						<li>Go to the project repository:
+							<a href="https://github.com/martinkochdesign/openEHR_fellowship_2025_project/tree/main"
+								target="_blank">
+								https://github.com/martinkochdesign/openEHR_fellowship_2025_project/tree/main
+							</a>
+						</li>
+						<li>Click on <strong>Code</strong> and select <strong>Download ZIP</strong>.</li>
+						<li>Unpack the ZIP file to your destination folder.</li>
+					</ul>
+				</li>
+				<li>
+					<strong>Start Archetype Companion</strong>
+					<ul>
+						<li>Navigate to the extracted folder.</li>
+						<li>Double-click on <code>index.html</code> to launch the Archetype Companion in your browser.
+						</li>
+					</ul>
+				</li>
+			</ol>
+
+			<h3>Updating the Archetype Data Dictionary</h3>
+
+			<ol>
+				<li>
+					<strong>Generate the Data Dictionary</strong>
+					<ul>
+						<li>Open the <code>dist</code> folder inside your extracted package.</li>
+						<li>Double-click on the latest version of the executable, for example:
+							<code>create_existing_JSON_from_ADL_V4_15.exe</code>.</li>
+						<li>Select the source for your archetypes when prompted.</li>
+						<li>Click on <strong>Download and create dataset.js</strong>.</li>
+						<li>
+							The tool will:
+							<ul>
+								<li>Download a ZIP file from the selected source.</li>
+								<li>Extract all ADL 1.4 archetypes.</li>
+								<li>Compile the relevant information into a file named <code>dataset.js</code>.</li>
+							</ul>
+						</li>
+						<li>The <code>dataset.js</code> file will be saved in the same directory as the executable.</li>
+					</ul>
+				</li>
+				<li>
+					<strong>Update the Application</strong>
+					<ul>
+						<li>Copy the newly created <code>dataset.js</code> file to the directory containing
+							<code>index.html</code>.</li>
+						<li>Restart the Archetype Companion if it is already running.</li>
+					</ul>
+				</li>
+			</ol>
+
+
+		</main>
+
+
+
+	</div>
+
+
+
+
+	<script>
+		// Dynamically generate the Table of Contents (TOC) from headers in main content
+		document.addEventListener('DOMContentLoaded', function () {
+			const toc = document.getElementById('toc');
+			const content = document.getElementById('manual-content');
+			const headers = content.querySelectorAll('h1, h2, h2, h3');
+			const tocItems = [];
+
+			headers.forEach(header => {
+				// Ensure each header has an id
+				if (!header.id) {
+					header.id = header.textContent.trim().toLowerCase().replace(/\s+/g, '-').replace(/[^\w\-]+/g, '');
+				}
+				// Indent based on header level
+				const level = parseInt(header.tagName[1]);
+				const li = document.createElement('li');
+				li.style.marginLeft = ((level - 1) * 18) + 'px';
+				const a = document.createElement('a');
+				a.href = '#' + header.id;
+				a.textContent = header.textContent;
+				a.dataset.level = level;
+				li.appendChild(a);
+				tocItems.push(li);
+			});
+
+			tocItems.forEach(li => toc.appendChild(li));
+
+			// No custom click handler for anchor navigation!
+			// The browser will handle anchor jumps and URL hash updates.
+
+			// Highlight active section in sidebar
+			window.addEventListener('scroll', function () {
+				let fromTop = window.scrollY + 30;
+				toc.querySelectorAll('a').forEach(link => {
+					let section = document.getElementById(link.getAttribute('href').substring(1));
+					if (
+						section.offsetTop <= fromTop
+						&&
+						section.offsetTop
+						+
+						section.offsetHeight >
+						fromTop
+					) {
+						link.classList.add('active');
+					}
+					else {
+						link.classList.remove('active');
+					}
+				});
+			});
+		});
+	</script>
+</body>
+
+</html>

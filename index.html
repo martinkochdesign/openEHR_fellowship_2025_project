@@ -1,0 +1,1109 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Archetype Companion</title>
+    <link rel="icon" type="image/x-icon" href="images/icon.png">
+    
+    <!-- BoxIcons -->
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <!--Excel library-->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
+    <!--D3 library-->
+    <!--<script src="https://unpkg.com/d3@7.9.0/dist/d3.min.js"></script>-->
+    <script src="https://unpkg.com/d3@7.9.0/dist/d3.min.js"></script> 
+      <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+   
+
+    <div id="loading_page" aria-busy="true" aria-label="Loading">
+        <div class="loader"></div>
+        <span class="loading-text">Loading, please wait...</span>
+    </div>
+
+
+
+    <div id="top">
+        <div id="top_container">
+            <div id="logo"><img src="images/logo.png" alt="logo" height="45"></div>
+
+            <div id="main_view_project_name">
+            </div>
+
+            <div style="cursor: pointer;display: flex; align-items: center;">
+                <img src="images/config1.png" alt="config1" height="25" onclick="set_window_configuration_1()"
+                    title="Standard view" id="standard_view_button">
+            </div>
+            <div style="cursor: pointer;display: flex; align-items: center;">
+                <img src="images/config2.png" alt="config2" height="25" onclick="set_window_configuration_2()"
+                    title="Checklist editor view" id="checklist_editor_view_button">
+            </div>
+            <div style="cursor: pointer;display: flex; align-items: center;">
+                <img src="images/config3.png" alt="config3" height="25" onclick="set_window_configuration_3()"
+                    title="Search view" id="search_view_button">
+            </div>
+            <div style="cursor: pointer;display: flex; align-items: center;">
+                <img src="images/config5.png" alt="config5" height="25" onclick="set_window_configuration_6()"
+                    title="Template planner view" id="tree_view_button">
+            </div>
+
+            <div></div> <!-- spacer div -->
+
+            <div style="display: flex; align-items: center;">
+                <img src="images/23F3_color.png" alt="History" height="27" onclick="show_search_history_page()"
+                    style="cursor: pointer" title="Visited archetypes history">
+            </div>
+
+            <div style="display: flex; align-items: center;">
+                <img src="images/1F4BE_color.png" alt="logo" height="30" onclick="triggerProjectDownload()"
+                    style="cursor: pointer;" title="Save project">
+            </div>
+
+            <div style="display: flex; align-items: center;">
+                <img src="images/2699_color.png" alt="logo" height="30" onclick="show_project_settings_page()"
+                    style="cursor: pointer;" title="Project options">
+            </div>
+
+            <div style="display: flex; align-items: center;">
+                <img src="images/2753_color.png" alt="?" height="30" onclick="show_about_page()"
+                    style="cursor: pointer;" title="About">
+            </div>
+
+            <div style="display: flex; align-items: center;">
+                <img src="images/1F4D1_color.png" alt="?" height="30" onclick="show_glossary_page()"
+                    style="cursor: pointer;" title="Class Glossary">
+            </div>
+
+            <div style="display: flex; align-items: center;">
+                <img src="images/button_bar.png" alt="Button bar" height="27" onclick="show_button_bar()"
+                    style="cursor: pointer;" title="Open shortcut bar">
+            </div>
+
+        </div>
+    </div>
+
+
+    <div id="main">
+
+         
+
+        <!-- ADD ALL WINDOWS HERE -->
+
+        <div id="wdw_button_bar" class="movable-div" style="right: 10px; top: 10px; overflow: hidden; display: none;
+        min-width: 35px;
+        max-width: 35px;
+        min-height: 50%;
+        max-height: 100%;        
+        ">
+            <div class="header">
+                <span></span>
+                <span> </span>
+                <span style="cursor: pointer; margin-right: 5px" onclick="minimize(this)">🗙</span>
+            </div>
+            <div class="resize-handle top"></div>
+            <div class="resize-handle right"></div>
+            <div class="resize-handle bottom"></div>
+            <div class="resize-handle left"></div>
+
+
+            <img src="images/2705_color.png" alt="Checklisy" width="43" onclick="show_checklist_window()"
+                style="position:absolute; top: 25px; right:-3px; cursor: pointer;" title="Open checklist">
+
+            <img src="images/checklist_editor_button.png" alt="Checklist editor" width="28"
+                onclick="show_checklist_editor()" style="position:absolute;top: 75px; right:3px; cursor: pointer;"
+                title="Open checklist editor">
+
+            <img src="images/existing_archetype_list.png" alt="Existing archetypes" width="28"
+                onclick="show_existing_archetype_list()"
+                style="position:absolute;top: 125px; right:3px; cursor: pointer;" title="Open existing archetype list">
+
+            <img src="images/1F50E_color.png" alt="Open filter" width="38" onclick="show_extended_search()"
+                style="position:absolute; top: 175px; left:0px; cursor: pointer;" title="Open search">
+
+
+            <img src="images/new_archetypes_list.png" alt="New archetypes" width="28"
+                onclick="show_new_archetype_list()" style="position:absolute;top: 225px; right:3px; cursor: pointer;"
+                title="Open New archetype list">
+
+
+            <img src="images/1F333_color.png" alt="Template planner" width="30" onclick="show_template_planner()"
+                style="position:absolute;top: 275px; right:3px; cursor: pointer;" title="Open Template Planner">
+
+            <img src="images/archetype_info.png" alt="Archetype info" width="25" onclick="show_archetype_info()"
+                style="position:absolute;top: 325px; right:5px; cursor: pointer;" title="Open Archetype info">
+
+            <img src="images/25C9_color.png" alt="Visualization" width="30" onclick="show_visualization_view()"
+                style="position:absolute;top: 375px; right:3px; cursor: pointer;" title="Open Visualization">
+
+
+        </div>
+
+
+
+
+        <!-- REVIEW THE SIZE AND MAX SIZE PARAMETERS FOR EVERY WINDOW -->
+        <div id="wdw_archetype_list" class="movable-div" style="width:300px; display: none;
+        min-width: 300px;
+        max-width: 600px;
+        min-height: 300px;
+        max-height: 100%;          
+        ">
+            <div class="header">
+                <span></span>
+                <span>Existing archetypes</span>
+                <span style="cursor: pointer; margin-right: 5px" onclick="minimize(this)">🗙</span>
+            </div>
+            <div class="resize-handle top"></div>
+            <div class="resize-handle right"></div>
+            <div class="resize-handle bottom"></div>
+            <div class="resize-handle left"></div>
+
+            <img src="images/1F50E_color.png" alt="Open filter" height="30" onclick="show_extended_search()"
+                style="position:absolute; top: 25px; right:20px; cursor: pointer;" title="Open search">
+
+            <img src="images/star_add.png" alt="Add to collection" height="25" onclick="addArchetypeToCollection()"
+                style="position:absolute; top: 75px; right:25px; cursor: pointer;" title="Add to collection"
+                id="add_to_collection_sidebar_button">
+
+            <img src="images/star_delete.png" alt="Remove archetype from collection" height="25"
+                onclick="removeArchetypeFromCollection()"
+                style="position:absolute; top: 75px; right:25px; cursor: pointer;"
+                title="Remove archetype from collection" id="remove_from_collection_sidebar_button">
+
+            <img src="images/hide_collection_items.png" alt="Hide collection items" height="25"
+                onclick="toggleViewCollectionItems()"
+                style="position:absolute; top: 125px; right:25px; cursor: pointer;" title="Hide collection items"
+                id="hide_collection_sidebar_button">
+
+            <img src="images/show_collection_items.png" alt="show collection items" height="25"
+                onclick="toggleViewCollectionItems()"
+                style="position:absolute; top: 125px; right:25px; cursor: pointer; display: none;"
+                title="Show collection items" id="show_collection_sidebar_button">
+
+
+            <img src="images/filter_quit.png" alt="Delete filter" height="20" onclick="clearSearchFilter()"
+                style="position:absolute; bottom: 30px; right:20px; cursor: pointer;" title="Delete filter"
+                id="delete_filter_sidebar_button">
+
+            <!--Number of found archetypes-->
+            <div id="N_of_N_found_sidebar">2/10</div>
+
+            <div id="existing_sidebar_list">
+                <ul id="archetype_sidebar_list">
+
+                </ul>
+            </div>
+
+
+        </div>
+
+
+
+        <div id="wdw_archetype_collection" class="movable-div" style="right: 10px; top: 10px; display: none;
+        min-width: 300px;
+        max-width: 600px;
+        min-height: 10%;
+        max-height: 100%;  
+        ">
+            <div class="header">
+                <span></span>
+                <span>New archetypes</span>
+                <span style="cursor: pointer; margin-right: 5px" onclick="minimize(this)">🗙</span>
+            </div>
+            <div class="resize-handle top"></div>
+            <div class="resize-handle right"></div>
+            <div class="resize-handle bottom"></div>
+            <div class="resize-handle left"></div>
+
+            <img src="images/new_archetype.png" alt="New archetype" height="25" onclick="createNewArchetype()"
+                style="position:absolute; top: 25px; right:20px; cursor: pointer;" title="Create new archetype">
+
+            <img src="images/remove_archetype.png" alt="Delete archetype" height="25"
+                onclick="deleteNewArchetype(event)" style="position:absolute; top: 65px; right:20px; cursor: pointer;"
+                title="Delete new archetype" id="delete_new_archetype_button">
+
+            <div id="collection_list">
+                <ul id="archetype_collection_list">
+                </ul>
+            </div>
+
+        </div>
+
+
+        <div id="wdw_visualization" class="movable-div" style="right: 10px; top: 10px; overflow: hidden; display: none;
+        min-width: 200px;
+        max-width: 100%;
+        min-height: 200px;
+        max-height: 100%;        
+        ">
+            <div class="header">
+                <span></span>
+                <span>Visualization</span>
+                <span style="cursor: pointer; margin-right: 5px" onclick="minimize(this)">🗙</span>
+            </div>
+            <div class="resize-handle top"></div>
+            <div class="resize-handle right"></div>
+            <div class="resize-handle bottom"></div>
+            <div class="resize-handle left"></div>
+
+
+            
+            <img src="images/back_in_time.png" alt="Undo" height="25" 
+                style="position:absolute; top: 30px; left:10px; cursor: pointer; z-index: 2;"
+            title="Go back in history" onclick="oneStepBackInHistory()" id="visualization_back_btn">
+
+            <img src="images/1F4F7_color.png" alt="Save image" height="35" onclick="downloadSVG('network')"
+                style="position:absolute; bottom: 60px; right:10px; cursor: pointer; z-index: 2;"
+                title="Save as SVG image">
+
+
+            <img src="images/reset_zoom.png" alt="Reset Zoom" height="25" onclick="resetZoom()"
+                style="position:absolute; bottom: 25px; right:20px; cursor: pointer; z-index: 2;" title="Reset zoom">
+
+
+            <div id="visualization">
+                <select id="select_vis_view" style="border-radius:5px; padding:3px;" onchange="updateLists();resetZoom();">
+                    <option value="ARCHETYPE" selected>Archetype</option>
+                    <option value="ARCHETYPEMINDMAP">Archetype Structure</option>
+                    <option value="SIMILAR">Similar</option>
+                    <option value="COMBINATION">Archetype+Similar</option>
+                    <option value="COLLECTION">Collection</option>
+                    <option value="PROJECT">Project</option>
+                    <option value="TREEPLANNER">Template Planner</option>
+                </select>
+
+                <svg id="network">
+                    <g>
+                    </g>
+                </svg>
+            </div>
+        </div>
+
+
+
+        <div id="wdw_archetype_info" class="movable-div" style="right: 10px; top: 10px; display: none;
+        min-width: 200px;
+        max-width: 100%;
+        min-height: 100px;
+        max-height: 100%; 
+        ">
+            <div class="header">
+                <span></span>
+                <span>Info</span>
+                <span style="cursor: pointer; margin-right: 5px" onclick="minimize(this)">🗙</span>
+            </div>
+            <div class="resize-handle top"></div>
+            <div class="resize-handle right"></div>
+            <div class="resize-handle bottom"></div>
+            <div class="resize-handle left"></div>
+
+            <img src="images/270F_color.png" alt="Edit" height="35" onclick="show_new_archetype_editor()"
+                style="position:absolute; top: 30px; right:20px; cursor: pointer;" title="Edit new archetype"
+                id="new_archetype_edit_button">
+
+            <img src="images/star_add.png" alt="Add to collection" height="25" onclick="addArchetypeToCollection()"
+                style="position:absolute; top: 30px; right:30px; cursor: pointer;" title="Add to collection"
+                id="add_to_collection_button_info">
+
+            <img src="images/star_delete.png" alt="Remove archetype from collection" height="25"
+                onclick="removeArchetypeFromCollection()"
+                style="position:absolute; top: 30px; right:30px; cursor: pointer;" title="Remove from collection"
+                id="remove_from_collection_button_info">
+
+            <div id="archetype_info">Archetype info is displayed here!</div>
+        </div>
+
+
+
+        <div id="wdw_checklist" class="movable-div" style="right: 10px; top: 10px;  display: none;
+        min-width: 300px;
+        max-width: 600px;
+        min-height: 400px;
+        max-height: 100%;
+        ">
+            <div class="header">
+                <span></span>
+                <span>Checklist</span>
+                <span style="cursor: pointer; margin-right: 5px" onclick="minimize(this)">🗙</span>
+            </div>
+            <div class="resize-handle top"></div>
+            <div class="resize-handle right"></div>
+            <div class="resize-handle bottom"></div>
+            <div class="resize-handle left"></div>
+            <div id="checklist">
+
+                <img src="images/checklist_editor_button.png" alt="Edit" height="30" onclick="show_checklist_editor()"
+                    style="position:absolute; top: 30px; right:20px; cursor: pointer;" title="Enter edit mode">
+
+                <!--
+                <img src="images/1F333_color.png" alt="Template planner" height="35" onclick="show_template_planner()"
+                    style="position:absolute; bottom: 10px; right:15px; cursor: pointer;" title="Open Template Planner"
+                    id="template_planner_button">
+              -->
+
+                <div id="checklistView"></div>
+            </div>
+        </div>
+
+
+        <div id="wdw_template_planner" class="movable-div" style="right: 10px; top: 10px;  display: none;
+        min-width: 300px;
+        max-width: 100%;
+        min-height: 400px;
+        max-height: 100%;
+        ">
+            <div class="header">
+                <span></span>
+                <span>Template Planner</span>
+                <span style="cursor: pointer; margin-right: 5px" onclick="minimize(this)">🗙</span>
+            </div>
+            <div class="resize-handle top"></div>
+            <div class="resize-handle right"></div>
+            <div class="resize-handle bottom"></div>
+            <div class="resize-handle left"></div>
+
+            <div id="template_planner_container">
+                <button id="toggleAllBtn" onclick="toggleAllArchetypeNodes()" >Collapse All</button>
+
+                <img src="images/1F5D1_color.png" alt="?" height="40" onclick="clearArchetypeTree()"
+                    style="position:absolute; bottom: 20px; right:20px; cursor: pointer;" title="Delete Archetype Tree">
+
+                <div id="template_planner"></div>
+                <pre id="result"></pre>
+                <div id="tree-container"></div>
+
+            </div>
+        </div>
+
+
+
+        <div id="wdw_checklist_editor" class="movable-div" style="display: none; 
+        min-width: 750px; 
+        max-width: 100%; 
+        min-height: 600px;
+        max-height: 100%;
+        ">
+            <div class="header">
+                <span></span>
+                <span>Checklist editor</span>
+                <span style="cursor: pointer; margin-right: 5px" onclick="minimize(this)">🗙</span>
+            </div>
+            <div class="resize-handle top"></div>
+            <div class="resize-handle right"></div>
+            <div class="resize-handle bottom"></div>
+            <div class="resize-handle left"></div>
+            <div id="checklistEditor">
+
+                <!--
+                <img src="images/1F333_color.png" alt="Template planner" height="35" onclick="show_template_planner()"
+                    style="position:absolute; bottom: 170px; right:20px; cursor: pointer;" title="Open Template Planner"
+                    id="template_planner_button">
+                -->
+
+                <img src="images/1F4BE_color_CL.png" alt="?" height="35" onclick="downloadExcel()"
+                    style="position:absolute; bottom: 120px; right:20px; cursor: pointer;"
+                    title="Save Checklist to Excel">
+
+
+                <input type="file" id="uploadExcel" accept=".xlsx" style="display: none;"
+                    onchange="loadFromExcel(event)" />
+
+
+                <img src="images/1F4C2_color.png" alt="?" height="35" onclick="triggerFileInput()"
+                    style="position:absolute; bottom: 70px; right:20px; cursor: pointer;"
+                    title="Load Checklist from Excel">
+
+
+
+                <img src="images/1F5D1_color.png" alt="?" height="40" onclick="clearchecklist()"
+                    style="position:absolute; bottom: 20px; right:20px; cursor: pointer;" title="Delete Checklist">
+
+                <div id="checklistSectionButton">
+                   <!--
+                    <span style="display:flex;align-items: center;">
+                        <img src="images/add.png" alt="Add" height="14" title="Add section" onclick="addSection()"
+                            style="cursor:pointer;">&nbsp;Add section
+                    </span>
+                    -->
+
+                    <button id="toggleAllSectionsBtn" onclick="toggleAllSections()" style="position:absolute; top: 22px; right: 70px;">Collapse All</button>
+
+                </div>
+
+                <div id="checklistSections"></div>
+
+            </div>
+        </div>
+
+
+        <div id="wdw_extended_search" class="movable-div" style="display: none;background-color: rgb(240, 240, 255);
+        min-width: 570px; 
+        max-width: 100%; 
+        min-height: 600px;
+        max-height: 100%;
+        ">
+            <div class="header">
+                <span></span>
+                <span>Search</span>
+                <span style="cursor: pointer; margin-right: 5px" onclick="minimize(this)">🗙</span>
+            </div>
+            <div class="resize-handle top"></div>
+            <div class="resize-handle right"></div>
+            <div class="resize-handle bottom"></div>
+            <div class="resize-handle left"></div>
+            <div style="border: 1px solid darkgray; border-radius: 5px; margin: 5px; margin-right:50px;">
+
+                <div id="searchbar_section">
+                    <label for="filter_set_select" style="background:hotpink;">
+                        <select id="filter_set_select" onchange="loadFilterData()" style="appearance: none; width:20px; height:20px; background: rgb(240,240,255); text-align: center;
+                    font-weight: 600; color: blue;">
+                            <option value="1" selected>1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                        </select>
+                    </label>
+
+
+                    <input type="text" id="searchInput" placeholder="Filter existing archetypes..."
+                        autocomplete="off" onchange="this.value=this.value.trim();"/>
+
+                    <div class="tooltip" id="tooltip_searchbar"><strong>?</strong></div>
+
+                    <!--Number of found archetypes-->
+                    <div id="N_of_N_found">2/10</div>
+
+                    <!--delete filter-->
+                    <img src="images/filter_quit.png" alt="Quit filter" height="20" onclick="clearSearchFilter()"
+                        style="cursor: pointer;" title="Delete filter" id="delete_filter_button">
+
+                </div>
+
+                <div id="filter_section">
+                    <label id="checkBoxID" class="checkboxLabel"><input type="checkbox" id="includeID"
+                            checked />ID</label>
+                    <label id="checkBoxName" class="checkboxLabel"><input type="checkbox"
+                            id="includeName" checked />Name</label>
+                    <label id="checkBoxPurpose" class="checkboxLabel"><input type="checkbox"
+                            id="includePurpose" />Purpose</label>
+                    <label id="checkBoxUse" class="checkboxLabel"><input type="checkbox" id="includeUse" />Use</label>
+                    <label id="checkBoxKeywords" class="checkboxLabel"><input type="checkbox"
+                            id="includeKeywords" />Keywords</label>
+                    <label id="checkBoxItems" class="checkboxLabel"><input type="checkbox"
+                            id="includeItems" />Items</label>
+                    <label id="checkBoxInclusions" class="checkboxLabel"><input type="checkbox"
+                            id="includeInclusions" />Inclusions</label>
+                </div>
+
+            </div>
+
+            <div id="filter_section_2">
+                <select id="filter_class" style="border-radius:5px; margin-left:5px; margin-bottom:5px;margin-top:0px;" onchange="updateLists()">
+                    <option value="" selected>-- Select class --</option>
+                </select>
+            </div>
+
+
+            <div id="existing_list">
+                <img src="images/star_add.png" alt="Add to collection" height="25" onclick="addArchetypeToCollection()"
+                    style="position:absolute; top: 40px; right:10px; cursor: pointer;" title="Add to collection"
+                    id="add_to_collection_button">
+
+                <img src="images/star_delete.png" alt="Remove archetype from collection" height="25"
+                    onclick="removeArchetypeFromCollection()"
+                    style="position:absolute; top: 40px; right:10px; cursor: pointer;" title="Remove from collection"
+                    id="remove_from_collection_button">
+
+                <img src="images/hide_collection_items.png" alt="Hide collection items" height="25"
+                    onclick="toggleViewCollectionItems()"
+                    style="position:absolute; top: 75px; right:10px; cursor: pointer;" title="Hide collection items"
+                    id="hide_collection_button">
+
+                <img src="images/show_collection_items.png" alt="show collection items" height="25"
+                    onclick="toggleViewCollectionItems()"
+                    style="position:absolute; top: 75px; right:10px; cursor: pointer; display: none;"
+                    title="Show collection items" id="show_collection_button">
+
+                <ul id="archetype_list">
+
+                </ul>
+            </div>
+        </div>
+
+
+        <div id="wdw_new_archetype_editor" class="movable-div" style="display: none;
+        min-width: 300px;
+        max-width: 500px;
+        min-height: 50px;
+        max-height: 600px;        
+        ">
+            <div class="header">
+                <span></span>
+                <span>New archetype editor</span>
+                <span style="cursor: pointer; margin-right: 5px" onclick="minimize(this)">🗙</span>
+            </div>
+            <div class="resize-handle top"></div>
+            <div class="resize-handle right"></div>
+            <div class="resize-handle bottom"></div>
+            <div class="resize-handle left"></div>
+
+            <div id="new_archetype_editor">
+
+
+                <div id="new_archetype_parameters">
+                    <label><strong>Concept name:</strong></label><br>
+                    <input type="text" id="new_archetype_concept_name" onchange="this.value=this.value.trim();setNewNodeData()"
+                        autocomplete="off" /><br>
+
+                    <label><strong>Archetype ID:</strong></label><br>
+                    <input type="text" id="new_archetype_id" onchange="this.value=this.value.trim();setNewNodeData()" autocomplete="off" disabled/><br>
+
+                    <label><strong>UUID: </strong></label><span id="new_archetype_uuid"></span><br>
+
+                    <label><strong>Class:</strong></label><br>
+                    <select id="new_archetype_class" onchange="setNewNodeData()">
+                        <option value="" selected>-- Select class --</option>
+                        <option value="ACTION">ACTION</option>
+                        <option value="ADMIN_ENTRY">ADMIN_ENTRY</option>
+                        <option value="CLUSTER">CLUSTER</option>
+                        <option value="COMPOSITION">COMPOSITION</option>
+                        <option value="EVALUATION">EVALUATION</option>
+                        <option value="INSTRUCTION">INSTRUCTION</option>
+                        <option value="OBSERVATION">OBSERVATION</option>
+                        <option value="SECTION">SECTION</option>
+                    </select><br>
+
+                    <label><strong>Purpose:</strong></label><br>
+                    <textarea id="new_archetype_purpose" oninput="" onchange="this.value=this.value.trim();setNewNodeData() "></textarea><br>
+
+                    <label><strong>Keywords:</strong></label><br>
+                    <input type="text" id="new_archetype_keywords" onchange="this.value=this.value.trim();setNewNodeData()" autocomplete="off" /><br>
+                    <hr>
+                    <label><strong>Assigned elements:</strong></label>
+                    <div id="assigned_elements_container">
+                        <div id="new_archetype_elements"></div>
+                    </div>
+
+                    <hr>
+
+                    <label><strong>Included archetypes:</strong></label><br>
+                    <div id="new_archetype_inclusions_container">
+                        
+                        <input list="myArchetypeCollectionOptions" type="search" id="new_archetype_listArchetypes" name="myInputNewArchetypeInclusion" placeholder="-- Select archetype --" autocomplete="off"/>
+
+                        <!--
+                        <select id="new_archetype_listArchetypes">
+                            <option value="" selected>-- Select archetype --</option>
+                        </select>
+                        -->
+
+                        <img src="images/add.png" alt="" width="15" title="Add selected archetype to included"
+                            onclick=" addArchetypeToNewArchetypeInclusionList()">
+
+                        <img src="images/remove.png" alt="" width="15" title="Remove selected archetype from included"
+                            onclick=" removeArchetypeToNewArchetypeInclusionList()">
+
+                    </div>
+
+                    <div id="new_archetype_inclusions">
+                        <ul id="new_archetype_inclusions_ul">
+                        </ul>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+
+        <div id="wdw_project_options" class="movable-div" style="display: none;
+        min-width: 400px;
+        max-width: 600px;
+        min-height: 440px;
+        max-height: 450px;      
+        
+        ">
+            <div class="header">
+                <span></span>
+                <span>Project options</span>
+                <span style="cursor: pointer; margin-right: 5px" onclick="minimize(this)">🗙</span>
+            </div>
+            <div class="resize-handle top"></div>
+            <div class="resize-handle right"></div>
+            <div class="resize-handle bottom"></div>
+            <div class="resize-handle left"></div>
+
+            <div id="project_info">
+
+                <img src="images/1F4BE_color.png" alt="Download Project" height="35" onclick="triggerProjectDownload()"
+                    style="position:absolute; top: 30px; right:10px; cursor: pointer;" title="Save Project to JSON">
+
+
+                <input type="file" id="load_project_button" accept=".json" style="display: none;"
+                    onchange="loadProjectFromJSON(event)" />
+
+                <img src="images/1F4C2_color.png" alt="?" height="35" onclick="triggerProjectFileInput()"
+                    style="position:absolute; top: 85px; right:10px; cursor: pointer;"
+                    title="Load Project from JSON File">
+
+                <img src="images/1F5A8_color.png" alt="?" height="30" id="btn_create_report"
+                    style="position:absolute; top: 135px; right:10px; cursor: pointer;" title="Create report"
+                    onclick="createReport()">
+
+                <img src="images/new_doc.png" alt="?" height="40" onclick="createNewProject()"
+                    style="position:absolute; bottom: 20px; right:5px; cursor: pointer;" title="Delete/Create new">
+
+
+                <label><strong>Project name: </strong></label><span style="color:red;">*</span><br>
+                <input type="text" id="project_name" autocomplete="off" onchange="this.value=this.value.trim();"/><br>
+
+                <label><strong>Description:</strong></label><br>
+                <textarea id="project_description" placeholder="Type your description here..."></textarea><br>
+
+                <label><strong>Author: </strong></label><br>
+                <input type="text" id="project_author" autocomplete="off" onchange="this.value=this.value.trim();"/><br>
+
+                <label><strong>Author contact: </strong></label><br>
+                <input type="text" id="project_contact" autocomplete="off" onchange="this.value=this.value.trim();"/><br>
+
+
+                <label><strong>Copyright: </strong></label><br>
+                <input type="text" id="project_copyright" autocomplete="off" onchange="this.value=this.value.trim();"/><br>
+
+                <div style="display: flex; justify-content: left; margin-top: 10px;">
+                    <label style="display: flex; align-items: left;">
+                        <input type="checkbox" id="dont_show_splash2" style="margin-right: 8px;"
+                            onchange=triggerNoSplashCheckSync()>
+                        Do not show splash screen on start
+                    </label>
+                </div>
+
+                <div style="display: flex; justify-content: left; margin-top: 10px;">
+                    <label style="display: flex; align-items: left;">
+                        <input type="checkbox" id="apply_theme_changes" style="margin-right: 8px;"
+                            onchange=updateHeaderGradientForHoliday()>
+                        Change color theme throughout the year
+                    </label>
+                </div>
+
+            </div>
+            <div id="project_buttons">
+                <div id="project_buttons_left">
+                    <button id="new_project_button">NEW</button>
+                    <button id="download_project_button">DOWNLOAD</button>
+                </div>
+                <div id="project_buttons_right">
+                    <button id="clear_storage" title="Clear Local Storage">🗑️</button>
+                </div>
+
+            </div>
+        </div>
+
+
+        <div id="wdw_about" class="movable-div" style="display: none; z-index:5; 
+        min-width:400px;
+        max-width: 100%; 
+        min-height:400px;
+        max-height:100%;">
+            <div class="header">
+                <span></span>
+                <span>About</span>
+                <span style="cursor: pointer; margin-right: 5px" onclick="minimize(this)">🗙</span>
+            </div>
+            <div class="resize-handle top"></div>
+            <div class="resize-handle right"></div>
+            <div class="resize-handle bottom"></div>
+            <div class="resize-handle left"></div>
+
+            <a href="manual.html" target="_blank">
+                <img src="images/1F4DA_color.png" alt="Open manual" height="44" onclick=""
+                    style="position:absolute; top: 30px; right:20px; cursor: pointer;" title="Open manual"></a>
+
+
+            <div class="about-content" style="padding:10px 10px 10px 10px;">
+
+                <section class="about-section">
+                    <h3>About the Application</h3>
+                    <dl>
+                        <strong>Name:</strong>
+                        <dd><strong>Archetype Companion</strong></dd>
+                        <span id="version_info_about"></span>
+                        <strong>License:</strong>
+                        <dd>
+                            Apache 2.0
+                            <a href="https://www.apache.org/licenses/LICENSE-2.0" target="_blank" rel="noopener">
+                                <img src="images/1F680_color.png" alt="License Link" height="20">
+                            </a>
+                        </dd>
+
+                        <strong>Copyright:</strong>
+                        <dd>2025, CatSalut. Servei Català de la Salut</dd>
+
+                        <strong>Author:</strong>
+                        <dd>
+                            Martin A. Koch, PhD
+                            <a href="https://www.linkedin.com/in/martin-andreas-koch-phd-49669537/?locale=en_US"
+                                target="_blank" rel="noopener">
+                                <img src="images/1F680_color.png" alt="LinkedIn" height="20">
+                            </a>
+                        </dd>
+
+                        <strong>Graphics:</strong>
+                        <dd>
+                            All emojis by <a href="https://openmoji.org/" rel="nofollow">OpenMoji</a> (<a
+                                href="https://creativecommons.org/licenses/by-sa/4.0/#" rel="nofollow">CC BY-SA 4.0</a>)
+                        </dd>
+                    </dl>
+                    This tool was developed as part of the <strong>openEHR 2025/26 Fellowship Programme</strong>.
+                </section>
+
+                <section class="about-section">
+                    <h3>About the Archetype Data</h3>
+                    <span id="data_date_about"></span>
+                    <span id="data_source_about"></span>
+                    <div class="about-disclaimer">
+                        <strong>Disclaimer:</strong>
+                        The openEHR archetype information in this tool is extracted automatically from external sources
+                        (such as CKM) and provided for convenience only. Accuracy, completeness, or currency of the data
+                        is not guaranteed. For authoritative information, consult the original archetype source as
+                        stated within the tool.
+                    </div>
+                </section>
+
+                <section class="about-section">
+                    <h3>Privacy & Data Protection</h3>
+                    <p><i>No Personal Data Collection:</i> This application does not collect, process, or store any
+                        personal data.</p>
+                    <p><i>No Tracking Technologies:</i> No cookies, analytics scripts, or third-party tracking services
+                        are used.</p>
+                    <p><i>Local Storage Only:</i> All tool-related information is stored locally in your browser and
+                        never transmitted to any server.</p>
+                    <p><i>User Autonomy & Transparency:</i> The design prioritizes user control, transparency, and
+                        minimal data exposure for a secure, privacy-respecting experience.</li>
+
+                </section>
+                <div>
+                    <a href="docs/important_work_related_stuff.html" target="_blank" rel="noopener">
+                        <img src="images/1F3AE_color.png" alt="" height="20">
+                    </a>
+                </div>
+            </div>
+
+
+
+
+        </div>
+
+        <div id="wdw_search_history" class="movable-div" style="display: none;
+            min-width: 300px;
+            max-width: 500px; 
+            min-height: 50px;
+            max-height: 100%;">
+            <div class="header">
+                <span></span>
+                <span>Visit history</span>
+                <span style="cursor: pointer; margin-right: 5px" onclick="minimize(this)">🗙</span>
+            </div>
+            <div class="resize-handle top"></div>
+            <div class="resize-handle right"></div>
+            <div class="resize-handle bottom"></div>
+            <div class="resize-handle left"></div>
+
+            <img src="images/back_in_time.png" alt="Back" height="35"
+                style="position:absolute; top: 30px; right:5px; cursor: pointer;" title="Back" id="HistoryBackButton" onclick="oneStepBackInHistory()">
+
+            <img src="images/delete_history.png" alt="Clear" height="35"
+                style="position:absolute; top: 80px; right:5px; cursor: pointer;" onclick="clearVisitedHistory()"
+                title="Clear History" id="HistoryClearButton">
+
+
+            <div id="search_history_content">
+                <div id="search_history_list">
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <div id="bottom">
+        <div id="bottom_container">
+            <div id="bottom_info" style="display: flex; align-items: center;"></div>
+
+
+            <div style="display: flex; align-items: center;">
+                A collaboration of&nbsp; <img src="images/openehr_logo.png" alt="" height="15"> &nbsp;and&nbsp; <img
+                    src="images/salut_logo.png" alt="" height="25">
+            </div>
+        </div>
+
+    </div>
+
+
+    <!-- Splash screen-->
+    <div id="wdw_splash" class="movable-div" style="display: none; z-index:10; 
+    min-width:420px; 
+    max-width:100%; 
+    min-height:420px; 
+    max-height:100%;">
+        <div class="header">
+            <span></span>
+            <span>Welcome</span>
+            <span style="cursor: pointer; margin-right: 5px" onclick="minimize(this)">🗙</span>
+        </div>
+        <div class="resize-handle top"></div>
+        <div class="resize-handle right"></div>
+        <div class="resize-handle bottom"></div>
+        <div class="resize-handle left"></div>
+
+        <div class="splash-content" style="padding: 24px; height:calc(100% - 45px); overflow-y: auto; font-family: inherit; background: #f8fafc;">
+            <!-- Welcome Graphic -->
+            <!--<div style="display: flex; justify-content: center; margin-bottom: 16px;">
+                <img src="welcome_icon.svg" alt="Welcome" style="height: 64px; width: 64px;">
+            </div>-->
+        
+            <h2 style="text-align: center; color: #2a4d69;">Welcome to the openEHR Archetype Companion</h2>
+            <p style="text-align: center; font-size: 0.97em; color: #2a4d69; margin-bottom: 0px;">
+                New here? Start with the manual or see the quick start steps below!
+            </p>
+            <!-- Highlighted User Manual Button -->
+            <div style="display: flex; justify-content: center; margin: 15px;">
+                <a href="manual.html" target="_blank" style="
+                    background: #2a4d69;
+                    background: salmon;
+                    color: #fff;
+                    padding: 12px 28px;
+                    border-radius: 6px;
+                    font-weight: bold;
+                    font-size: 1.1em;
+                    text-decoration: none;
+                    box-shadow: 0 2px 8px rgba(42,77,105,0.08);
+                    display: flex;
+                    align-items: center;
+                    gap: 8px;
+                ">
+                    <span>📖</span> USER MANUAL
+                </a>
+            </div>
+
+        
+            <!-- Quick Start / Tips Section -->
+            <div style="
+                background-color:rgb(191, 235, 255); 
+                border-radius: 10px;
+                margin-bottom: 10px;
+                padding-bottom: 10px;
+                box-shadow: 0 1px 4px rgba(42,77,105,0.04);
+                max-width: 540px;
+                margin-left: auto;
+                margin-right: auto;
+            ">
+                <h3 style="margin-top: 0; color: #2a4d69; font-size: 1em; text-align: center;">Quick Start <span style=" font-size: 0.85em;">(📺 See videos <a href="manual.html#video-tutorials" target="_blank" rel="noopener noreferrer">here</a>!📺)</span></h3>
+                <ul style="margin: 0px 18px 0px 18px; padding: 0; color: #2a4d69;">
+                    <li class="notselectable" style="font-size: 14px;">🗂️ <strong>Create or open a project</strong> to begin modelling.</li>
+                    <li class="notselectable" style="font-size: 14px;">📝 <strong>Use the checklist</strong> to track your modelling progress.</li>
+                    <li class="notselectable" style="font-size: 14px;">🔍 <strong>Browse archetypes</strong> and add them to your collection.</li>
+                    <li class="notselectable" style="font-size: 14px;">📝 <strong>Assign archetypes</strong> to your checklist elements.</li>
+                    <li class="notselectable" style="font-size: 14px;">🌳 <strong>Plan an archetype hierarchy</strong> for your next steps in modelling.</li>                    
+                </ul>
+            </div>
+        
+            <p style="text-align: center; font-size: 0.85em; color: #3d3d3d;">
+                Developed as part of the <strong>openEHR 2025/26 Fellowship Programme</strong> to support the design and management of clinical knowledge models.
+            </p>
+        
+            <!-- Collapsible Disclaimer Section -->
+            <details style="margin-top: 18px; margin-bottom: 8px; border:none;">
+                <summary style="font-size: 0.85em; color: #666; cursor: pointer;">
+                    ⚠️ Disclaimer & Terms
+                </summary>
+                <div style="font-size: 0.85em; color: #666; margin-top: 8px;">
+                    <p>
+                        <strong>Disclaimer:</strong> The archetype data is extracted automatically from external sources (e.g., CKM) for convenience. Accuracy and completeness are not guaranteed. For authoritative information, consult the original sources.
+                    </p>
+                    <p>
+                        This application is provided "as is" without any warranties, express or implied. By using this application, you acknowledge and agree that you do so at your own risk. The developers and authors of this application shall not be held liable for any direct, indirect, incidental, special, or consequential damages arising out of or in connection with the use or inability to use this application, even if advised of the possibility of such damages. Users are solely responsible for any decisions or actions taken based on the information provided by this tool.
+                    </p>
+                </div>
+            </details>
+        
+            <!-- Do not show again -->
+            <div style="display: flex; justify-content: center; margin-top: 18px;">
+                <label style="display: flex; align-items: center;">
+                    <input type="checkbox" id="dont_show_splash" style="margin-right: 8px;" onchange="createProjectFile()">
+                    Do not show this screen on start
+                </label>
+            </div>
+        </div>
+
+
+        <!--<div class="splash-content" style="padding: 10px; height:calc(100% - 45px); overflow-y: auto;">
+
+            <h2>Welcome to openEHR Archetype Companion</h2>
+            <p>
+                Welcome! Thank you for choosing this tool to support your clinical modelling work.
+                We hope you find it intuitive, helpful, and empowering for your openEHR projects.
+            </p>
+
+            <p>
+                Developed as part of the <strong>openEHR 2025/26 Fellowship Programme</strong> to support the design and
+                management of clinical knowledge models.
+            </p>
+            <p>
+
+                Please feel free to consult the <a href="manual.html" target="_blank">USER MANUAL</a>.
+            </p>
+
+            <p style="font-size: 0.85em; color: #666;">
+                <strong>Disclaimer:</strong> The archetype data is extracted automatically from external sources (e.g.,
+                CKM) for convenience. Accuracy and completeness are not guaranteed. For authoritative information,
+                consult the original sources.
+            </p>
+            <p style="font-size: 0.85em; color: #666;">
+                This application is provided "as is" without any warranties, express or implied. By using this
+                application, you acknowledge and agree that you do so at your own risk. The developers and authors of
+                this application shall not be held liable for any direct, indirect, incidental, special, or
+                consequential damages arising out of or in connection with the use or inability to use this application,
+                even if advised of the possibility of such damages. Users are solely responsible for any decisions or
+                actions taken based on the information provided by this tool.
+            </p>
+            <div style="display: flex; justify-content: center; margin-top: 10px;">
+                <label style="display: flex; align-items: center;">
+                    <input type="checkbox" id="dont_show_splash" style="margin-right: 8px;"
+                        onchange=createProjectFile()>
+                    Do not show this screen on start
+                </label>
+            </div>
+        </div> -->
+    </div>
+
+    <!-- Warning screen-->
+    <div id="wdw_warning" class="movable-div" style="display: none; z-index:10; 
+     min-width:420px; 
+     max-width:100%; 
+     min-height:420px; 
+     max-height:100%;">
+        <div class="header">
+            <span></span>
+            <span>Warning</span>
+            <span style="cursor: pointer; margin-right: 5px" onclick="minimize(this)">🗙</span>
+        </div>
+        <div class="resize-handle top"></div>
+        <div class="resize-handle right"></div>
+        <div class="resize-handle bottom"></div>
+        <div class="resize-handle left"></div>
+
+        <div id="warning-content" style="padding: 10px; height:calc(100% - 45px); overflow-y: auto;">
+            <h2>Warning</h2>
+            <p>
+                No warning detected!
+            </p>
+        </div>
+    </div>
+
+
+    <!-- Glossary screen-->
+    <div id="wdw_glossary" class="movable-div" style="display: none; z-index:10; 
+          min-width:420px; 
+          max-width:100%; 
+          min-height:420px; 
+          max-height:100%;">
+        <div class="header">
+            <span></span>
+            <span>Class Glossary</span>
+            <span style="cursor: pointer; margin-right: 5px" onclick="minimize(this)">🗙</span>
+        </div>
+        <div class="resize-handle top"></div>
+        <div class="resize-handle right"></div>
+        <div class="resize-handle bottom"></div>
+        <div class="resize-handle left"></div>
+        <div class="glossary_container" id="glossaryContainer">
+            <div class="glossary_sidebar">
+                <div class="glossary_search_bar">
+                    <input type="text" id="glossary_searchInput" placeholder="Search classes..." autocomplete="off" onchange="this.value=this.value.trim();">
+                    <div class="search-options">
+                        <small style="color:black;">
+                            <span>Include:</span><br>
+                            <label><input type="checkbox" id="glossary_searchAttrName"> Attribute names</label><br>
+                            <label><input type="checkbox" id="glossary_searchAttrDesc"> Attribute
+                                descriptions</label><br>
+                            <label><input type="checkbox" id="glossary_searchAttrDataType"> Attribute data type</label>
+                        </small>
+                    </div>
+                </div>
+
+                <div class="glossary_entry_section">
+                    <ul class="glossary_entry_list" id="glossary_entryList"></ul>
+                </div>
+            </div>
+
+            <div class="glossary_main" id="glossary_mainPanel">
+                <div style="color:#888;">
+                    Select a class from the left to view details.
+                    <em>
+                        <p>
+                            <span id="glossary_extraction_date" ></span>
+
+                            <br><br>
+
+                            The Archetype Companion provides a glossary of openEHR classes. The information on openEHR
+                            classes has been extracted previously from the following sources:
+                            <br><br>
+
+
+                            <span style="display: block; margin-left: 1em;">
+                                <a
+                                    href="https://specifications.openehr.org/releases/BASE/latest/base_types.html">BASE
+                                    Types</a><br>
+                                <a href="https://specifications.openehr.org/releases/RM/latest/common.html">Reference
+                                    Model: Common</a><br>
+                                <a href="https://specifications.openehr.org/releases/RM/latest/data_structures.html">Reference
+                                    Model: Data Structures</a><br>
+                                <a href="https://specifications.openehr.org/releases/RM/latest/data_types.html">Reference
+                                    Model: Data Types</a><br>
+                                <a href="https://specifications.openehr.org/releases/RM/latest/demographic.html">Reference
+                                    Model: Demographic</a><br>
+                                <a href="https://specifications.openehr.org/releases/RM/latest/ehr_extract.html">Reference
+                                    Model: EHR Extract</a><br>
+                                <a href="https://specifications.openehr.org/releases/RM/latest/ehr.html">Reference
+                                    Model: EHR</a><br>
+                                <a href="https://specifications.openehr.org/releases/RM/latest/integration.html">Reference
+                                    Model: Integration</a><br>
+                                <a href="https://specifications.openehr.org/releases/RM/latest/support.html">Reference
+                                    Model: Support</a><br>
+                                <a href="https://specifications.openehr.org/classes">openEHR Class Index</a>
+                            </span>
+                        </p>
+
+                        <p style="margin-top: 2em; font-size: 0.95em;">
+                            <strong>Legal Notice:</strong><br>
+                            This glossary is provided for informational purposes only. We do not claim authorship of the
+                            original openEHR content, nor do we assert any copyright over it. All copyrights and
+                            intellectual property rights remain with the respective owners and authors. The information
+                            is presented as is, without warranty of any kind, either express or implied. Users must
+                            ensure that any use of this content complies with the applicable licences and terms set by
+                            the original copyright holders. No modifications or redistribution of the original material
+                            are implied or encouraged by this resource.
+                        </p>
+                    </em>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+
+    <div class="tooltiptext" id="myTooltipText">
+        Add tooltip text here!
+    </div>
+
+    <!-- JAVASCRIPT CODE-->
+    <script src="dataset.js"></script>
+    <script src="index.js"></script>
+    <script src="glossary_data.js"></script>
+    <script src="glossary_functions.js"></script>  
+
+</body>
+
+</html>
