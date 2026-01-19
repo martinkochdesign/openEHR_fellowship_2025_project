@@ -1,18 +1,40 @@
-# ADL Extraction Tool
+# The Archetype Companion
 
-## Overview
+Welcome to the official GitHub repository of the **Archetype Companion**.
 
-The ADL Extraction Tool automates the extraction of key metadata from openEHR archetype files (ADL 1.4), supporting both manual and automated workflows. It can process archetypes from local collections or directly from online sources such as the Clinical Knowledge Manager (CKM). The tool supports both GUI and headless (automation-friendly) modes.
+The Archetype Companion is a small web-based helper tool designed to make working with openEHR archetypes and related content a bit more convenient. It runs entirely in the browser, so you can try it out without installing anything.
 
 ---
 
-<h2>Overview</h2>
+## Live Demo
+
+You can use the live version here:
+
+👉 https://martinkochdesign.github.io/archetype_companion/
+
+This is the most up-to-date public build and is intended for testing, exploration, and getting quick feedback on the current feature set.
+
+---
+
+## User Manual
+
+For a guided overview of the current functionality, configuration options, and example workflows, please see the user manual:
+
+📖 https://martinkochdesign.github.io/archetype_companion/manual.html
+
+The manual is updated regularly as new features and improvements are added.
+
+---
+
+# ADL Extraction Tool
+
+<h3>Overview</h3>
   <p>
     The ADL Extraction Tool automates the extraction of key metadata from openEHR archetype files (ADL 1.4), supporting both manual and automated workflows. It can process archetypes from local collections or directly from online sources such as the Clinical Knowledge Manager (CKM). The tool supports both GUI and headless (automation-friendly) modes.
   </p>
 
-  <h2>Requirements and installation</h2>
-  <h3>Software Requirements</h3>
+  <h3>Requirements and installation</h3>
+  <h4>Software Requirements</h4>
 
   <p>For the use of the source code, the following requirements have to be met:</p>
   
@@ -31,7 +53,7 @@ The ADL Extraction Tool automates the extraction of key metadata from openEHR ar
 
   <p>If the executable file is used, the target machine should be running a compatible version of Windows. The executable created on a specific version of Windows might not work on significantly older versions due to differences in system libraries.</p>
 
-  <h3>Installation</h3>
+  <h4>Installation</h4>
   <ol>
     <li>Download the last version of the script from the repository:<br>
       <a href="https://github.com/martinkochdesign/openEHR_fellowship_2025_project/blob/main/src/" target="_blank">https://github.com/martinkochdesign/openEHR_fellowship_2025_project/blob/main/src/</a>
@@ -44,9 +66,9 @@ The ADL Extraction Tool automates the extraction of key metadata from openEHR ar
   <p>If you use the executable, you can download the latest compiled version from <a href="https://github.com/martinkochdesign/openEHR_fellowship_2025_project/tree/main/dist" target="_blank">https://github.com/martinkochdesign/openEHR_fellowship_2025_project/tree/main/dist</a>.</p>
 
 
-## Usage
+### Usage
 
-### A. Running the Tool Manually (GUI Mode)
+#### A. Running the Tool Manually (GUI Mode)
 1. When launching the executable file or the script without headless mode, the GUI of the application opens.
 
 <img src="images/adl_extraction_finalgui.png" alt="ADL extraction - GUI final" width="400">
@@ -55,7 +77,7 @@ The ADL Extraction Tool automates the extraction of key metadata from openEHR ar
 2. Use the graphical interface to select the source of archetypes (local folder, CKM, or GitHub mirror).
 3. Start the extraction process with the button "Download and create dataset.js". The tool will process the files and generate an output file with the extracted metadata in the same direction as the executable (or script).
 
-### B. Running in Headless Mode (Automation)
+#### B. Running in Headless Mode (Automation)
 1. Set `headless = True` in the script configuration.
 2. Specify the source URL (e.g., CKM REST API endpoint) and other parameters as needed:
    ```python
@@ -68,7 +90,7 @@ The ADL Extraction Tool automates the extraction of key metadata from openEHR ar
 3. Run the script.
 4. The tool will run without user interaction and output the results in the same direction as the script.
 
-## Automation with GitHub Actions
+### Automation with GitHub Actions
 The tool can be scheduled to run automatically using GitHub Actions.
 
 Example Workflow (.github/workflows/update-dataset.yml):
@@ -104,7 +126,7 @@ jobs:
 ```
 Adjust the schedule as needed. See https://crontab.guru/ for cron syntax help. Ensure repository Actions permissions are set to "Read and write".
 
-## Output
+### Output
 - The tool generates a single output file dataset.js, containing extracted metadata for each archetype.
 
 - The result file is formatted for integration into a JavaScript code:
@@ -133,11 +155,11 @@ const allNodes = [{
         ],
         ...
 ```
-## Troubleshooting
+### Troubleshooting
 - Permission errors: Ensure all files are closed before running/deleting outputs.
 - Missing dependencies: Double-check your requirements.txt and Python version.
 - Automation issues: Verify GitHub Actions permissions and workflow YAML syntax.
 
 ## Support & Contributions
-For issues, feature requests, or contributions, please use the [https://github.com/martinkochdesign/openEHR_fellowship_2025_project](GitHub - martinkochdesign/openEHR_fellowship_2025_project) issue tracker or submit a pull request.
+For issues, feature requests, or contributions, please use the [https://github.com/martinkochdesign/archetype_companion](GitHub - martinkochdesign/archetype_companion) issue tracker or submit a pull request.
 
